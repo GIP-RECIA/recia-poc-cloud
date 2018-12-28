@@ -1,0 +1,12 @@
+/docker-compose.override.yml
+/.docker/.ca-certificates
+/.init/
+/.bash_enter.env
+/.bin/jq
+
+/.docker/*/Dockerfile
+
+/volumes/nextcloud/config/*
+/volumes/nextcloud/custom_apps/*
+/volumes/nextcloud/data/*
+/volumes/nextcloud/themes/*

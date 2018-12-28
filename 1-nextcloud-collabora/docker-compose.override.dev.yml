@@ -1,0 +1,23 @@
+version: '2.2'
+services:
+  nextcloud:
+    environment:
+      - 'XDEBUG_CONFIG=idekey=reciacloud remote_host=${HOST_IP}'
+      - 'PHP_IDE_CONFIG=serverName=reciacloud'
+      - 'VIRTUAL_HOST=nextcloud.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+    networks:
+      - default
+      - nginx-proxy
+  nextcloud-db:
+    ports:
+      - '${DOCKER_DEVBOX_PORT_PREFIX}32:5432'
+  collabora:
+    environment:
+      - 'VIRTUAL_HOST=collabora.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - 'VIRTUAL_PORT=9980'
+    networks:
+      - default
+      - nginx-proxy
+networks:
+  nginx-proxy:
+    external: true
