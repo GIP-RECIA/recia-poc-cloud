@@ -5,6 +5,8 @@ set -e
 read HOST_IP <<< `hostname -I`
 SEAFILE_URL="${SEAFILE_URL-http://${HOST_IP}}"
 
+rm -f /seafile/conf/gunicorn.conf
+
 crudini --set /seafile/conf/ccnet.conf General SERVICE_URL "${SEAFILE_URL}"
 
 crudini --merge /seafile/conf/seafile.conf <<'EOF'

@@ -48,6 +48,13 @@ rm /seafile/seafile-server-latest
 
 mkdir -p /seafile/seahub-data/custom /seafile/seahub-data/CACHE
 
+# symlink log files to stdout
+# ln -sF /dev/stdout /seafile/logs/ccnet.log
+# ln -sF /dev/stdout /seafile/logs/controller.log
+# ln -sF /dev/stdout /seafile/logs/seafdav.log
+# ln -sF /dev/stdout /seafile/logs/seafile.log
+# ln -sF /dev/stdout /seafile/logs/seahub.log
+
 [ -f /var/run/supervisord.pid ] && supervisorctl start main:*
 
 echo "Now waiting for processes to start before creating admin user..."
