@@ -6,7 +6,4 @@
 
 /.docker/*/Dockerfile
 
-/volumes/nextcloud/config/*
-/volumes/nextcloud/custom_apps/*
-/volumes/nextcloud/data/*
-/volumes/nextcloud/themes/*
+/volumes/nextcloud-config

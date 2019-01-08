@@ -1,5 +1,5 @@
-NextCloud + Collabora CODE
-==========================
+NextCloud + OnlyOffice
+======================
 
 Installation
 ============
@@ -10,6 +10,8 @@ de NextCloud.
 ```
 dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.override.install.yml up -d
 ```
+
+*Les prochains lancements pourront se faire avec `dc up -d` uniquement.*
 
 - Configurer les noms de domaine autorisés et l'URL publique dans le fichier `volumes/nextcloud/config/config.php`
 
@@ -37,9 +39,10 @@ Problèmes rencontrés
 - [ONLYOFFICE/onlyoffice-nextcloud#17](https://github.com/ONLYOFFICE/onlyoffice-nextcloud/issues/17)
 
 L'autorité de certification "GFI Orléans" ne semble pas reconnue par NodeJS au sein du container, malgré la présence de 
-la variable `NODE_EXTRA_CA_CERTS` au sein du container. Celà ne devrait pas poser de problème avec l'utilisateur de 
+la variable `NODE_EXTRA_CA_CERTS` au sein du container. Celà ne devrait pas poser de problème avec l'utilisation de 
 certificats de production fournis par une autorité réelle.
 
 Modifier le fichier `/etc/onlyoffice/documentserver/default.json` `rejectUnauthorized:` `false` => `true`. 
 
+Cette modification est intégrée au Dockerfile, et ne devrait pas être utilisée en production.
 
