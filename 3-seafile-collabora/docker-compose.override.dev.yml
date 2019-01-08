@@ -1,0 +1,17 @@
+version: '2.2'
+services:
+  seafile:
+    environment:
+      - 'VIRTUAL_HOST=seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+    ports:
+      - '${DOCKER_DEVBOX_PORT_PREFIX}80:8000'
+      - '${DOCKER_DEVBOX_PORT_PREFIX}82:8082'
+    networks:
+      - default
+      - nginx-proxy
+  seafile-db:
+    ports:
+      - '${DOCKER_DEVBOX_PORT_PREFIX}06:3306'
+networks:
+  nginx-proxy:
+    external: true
