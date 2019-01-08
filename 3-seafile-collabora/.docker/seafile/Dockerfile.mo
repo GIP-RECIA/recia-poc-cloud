@@ -3,6 +3,17 @@ FROM ubuntu:16.04
 ENV LANG=C.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
 
+{{#DOCKER_DEVBOX_CA_CERTIFICATES}}
+COPY .ca-certificates/* /usr/local/share/ca-certificates/
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/* \
+&& update-ca-certificates
+
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt \
+    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+{{/DOCKER_DEVBOX_CA_CERTIFICATES}}
+
 RUN \
     apt-get update && \
     apt-get install --no-install-recommends -y \
