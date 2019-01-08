@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f /seafile/.installed ]; then
+if [ ! -f "/seafile/conf/seahub_settings.py" ]; then
     exit 0
 fi
 
@@ -26,10 +26,8 @@ manage_py="${INSTALLPATH}/seahub/manage.py"
 gunicorn_conf=${INSTALLPATH}/runtime/seahub.conf
 gunicorn_exe=${INSTALLPATH}/seahub/thirdpart/gunicorn
 
-errorlog="${TOPDIR}/logs/seahub-error.log"
-accesslog="${TOPDIR}/logs/seahub-access.log"
-
-mkdir -p "${TOPDIR}/logs"
+errorlog="/dev/stderr"
+accesslog="/dev/stdout"
 
 exec python "${gunicorn_exe}" seahub.wsgi:application \
     -c "${gunicorn_conf}" -b "0.0.0.0:8000" --preload \

@@ -12,6 +12,13 @@ services:
   seafile-db:
     ports:
       - '${DOCKER_DEVBOX_PORT_PREFIX}06:3306'
+  collabora:
+    environment:
+      - 'VIRTUAL_HOST=collabora.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - 'VIRTUAL_PORT=9980'
+    networks:
+      - default
+      - nginx-proxy
 networks:
   nginx-proxy:
     external: true

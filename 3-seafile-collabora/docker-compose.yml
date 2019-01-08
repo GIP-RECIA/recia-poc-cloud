@@ -7,7 +7,10 @@ services:
     image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile'
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     volumes:
-      - 'seafile:/seafile'
+      - 'seafile-ccnet:/seafile/ccnet'
+      - 'seafile-seafile-data:/seafile/seafile-data'
+      - 'seafile-seahub-data:/seafile/seahub-data'
+      - '${COMPOSE_PROJECT_DIR}/volumes/seafile-conf:/seafile/conf'
     environment:
       - 'SEAFILE_URL=https://seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
       - 'MYSQL_HOST=seafile-db'
@@ -28,6 +31,23 @@ services:
     volumes:
       - '${COMPOSE_PROJECT_DIR}:/workdir'
       - 'seafile-db:/var/lib/mysql'
-volumes:
-  seafile: null
+  collabora:
+    build:
+      context: .docker
+      dockerfile: collabora/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/collabora'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    cap_add:
+      - MKNOD
+    environment:
+      - 'DONT_GEN_SSL_CERT=1'
+      - 'domain=seafile\\.${DOCKER_DEVBOX_DOMAIN_PREFIX}\\.${DOCKER_DEVBOX_DOMAIN}'
+      - 'username=admin'
+      - 'password=S3cRet'
+      - 'extra_params=--o:ssl.enable=false --o:ssl.termination=true'
+volumes:  
+  seafile-seafile-data: null
+  seafile-seahub-data: null
+  seafile-ccnet: null
   seafile-db: null
