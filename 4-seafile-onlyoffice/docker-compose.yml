@@ -1,0 +1,45 @@
+version: '2.2'
+services:
+  seafile:
+    build:
+      context: .docker
+      dockerfile: seafile/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile'
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    volumes:
+      - 'seafile-ccnet:/seafile/ccnet'
+      - 'seafile-seafile-data:/seafile/seafile-data'
+      - 'seafile-seahub-data:/seafile/seahub-data'
+      - '${COMPOSE_PROJECT_DIR}/volumes/seafile-conf:/seafile/conf'
+    environment:
+      - 'SEAFILE_URL=https://seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - 'MYSQL_HOST=seafile-db'
+      - 'MYSQL_USER=seafile'
+      - 'MYSQL_USER_PASSWD=seafile'
+      - 'MYSQL_ROOT_PASSWD=reciacloud'
+      - 'ADMIN_EMAIL=admin@example.com'
+      - 'ADMIN_PASSWORD=admin'
+  seafile-db:
+    build:
+      context: .docker
+      dockerfile: seafile-db/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile-db'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=reciacloud'
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}:/workdir'
+      - 'seafile-db:/var/lib/mysql'
+  onlyoffice:
+    build:
+      context: .docker
+      dockerfile: onlyoffice/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/onlyoffice'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+volumes:  
+  seafile-seafile-data: null
+  seafile-seahub-data: null
+  seafile-ccnet: null
+  seafile-db: null
