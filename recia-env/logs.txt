@@ -1,0 +1,420 @@
+Attaching to reciaenv_ldap_1
+[36mldap_1  |[0m *** CONTAINER_LOG_LEVEL = 4 (debug)
+[36mldap_1  |[0m *** Search service in CONTAINER_SERVICE_DIR = /container/service :
+[36mldap_1  |[0m *** link /container/service/:ssl-tools/startup.sh to /container/run/startup/:ssl-tools
+[36mldap_1  |[0m *** link /container/service/slapd/startup.sh to /container/run/startup/slapd
+[36mldap_1  |[0m *** link /container/service/slapd/process.sh to /container/run/process/slapd/run
+[36mldap_1  |[0m *** Set environment for startup files
+[36mldap_1  |[0m *** ignore : LANG = en_US.UTF-8 (keep LANG = en_US.UTF-8 )
+[36mldap_1  |[0m *** ignore : LANGUAGE = en_US.UTF-8 (keep LANGUAGE = en_US:en )
+[36mldap_1  |[0m *** Environment files will be proccessed in this order : 
+[36mldap_1  |[0m Caution: previously defined variables will not be overriden.
+[36mldap_1  |[0m /container/environment/99-default/default.startup.yaml
+[36mldap_1  |[0m /container/environment/99-default/default.yaml
+[36mldap_1  |[0m 
+[36mldap_1  |[0m *** --- process file : /container/environment/99-default/default.startup.yaml ---
+[36mldap_1  |[0m *** ignore : LDAP_DOMAIN = example.org (keep LDAP_DOMAIN = esco-centre.fr )
+[36mldap_1  |[0m *** ignore : LDAP_BASE_DN =  (keep LDAP_BASE_DN = dc=esco-centre,dc=fr )
+[36mldap_1  |[0m *** ignore : LDAP_BACKEND = mdb (keep LDAP_BACKEND = bdb )
+[36mldap_1  |[0m *** --- process file : /container/environment/99-default/default.yaml ---
+[36mldap_1  |[0m *** Run commands before startup...
+[36mldap_1  |[0m *** Running /container/run/startup/:ssl-tools...
+[36mldap_1  |[0m *** ------------ Environment dump ------------
+[36mldap_1  |[0m *** LDAP_LOG_LEVEL = 256
+[36mldap_1  |[0m *** SSL_HELPER_AUTO_RENEW_SERVICES_IMPACTED = slapd
+[36mldap_1  |[0m *** LDAP_REPLICATION = False
+[36mldap_1  |[0m *** LDAP_READONLY_USER_PASSWORD = readonly
+[36mldap_1  |[0m *** LC_CTYPE = en_US.UTF-8
+[36mldap_1  |[0m *** LDAP_ADMIN_PASSWORD = admin
+[36mldap_1  |[0m *** INITRD = no
+[36mldap_1  |[0m *** LDAP_DOMAIN = esco-centre.fr
+[36mldap_1  |[0m *** LDAP_REPLICATION_DB_SYNCPROV = binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials="$LDAP_ADMIN_PASSWORD" searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical
+[36mldap_1  |[0m *** PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[36mldap_1  |[0m *** LDAP_SSL_HELPER_PREFIX = ldap
+[36mldap_1  |[0m *** LDAP_BASE_DN = dc=esco-centre,dc=fr
+[36mldap_1  |[0m *** LDAP_TLS_VERIFY_CLIENT = demand
+[36mldap_1  |[0m *** LANG = en_US.UTF-8
+[36mldap_1  |[0m *** LDAP_READONLY_USER = False
+[36mldap_1  |[0m *** CONTAINER_SERVICE_DIR = /container/service
+[36mldap_1  |[0m *** LANGUAGE = en_US:en
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS_ROW_1 = ldap://ldap.example.org
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS_ROW_2 = ldap://ldap2.example.org
+[36mldap_1  |[0m *** LDAP_READONLY_USER_USERNAME = readonly
+[36mldap_1  |[0m *** LDAP_TLS_KEY_FILENAME = ldap.key
+[36mldap_1  |[0m *** HOME = /root
+[36mldap_1  |[0m *** LDAP_BACKEND = bdb
+[36mldap_1  |[0m *** LDAP_TLS = True
+[36mldap_1  |[0m *** LDAP_NOFILE = 1024
+[36mldap_1  |[0m *** LDAP_ORGANISATION = Example Inc.
+[36mldap_1  |[0m *** CONTAINER_LOG_LEVEL = 4
+[36mldap_1  |[0m *** LC_ALL = en_US.UTF-8
+[36mldap_1  |[0m *** KEEP_EXISTING_CONFIG = False
+[36mldap_1  |[0m *** LDAP_TLS_CRT_FILENAME = ldap.crt
+[36mldap_1  |[0m *** LDAP_REMOVE_CONFIG_AFTER_SETUP = True
+[36mldap_1  |[0m *** HOSTNAME = e0600df7c74e
+[36mldap_1  |[0m *** CONTAINER_STATE_DIR = /container/run/state
+[36mldap_1  |[0m *** LDAP_TLS_CA_CRT_FILENAME = ca.crt
+[36mldap_1  |[0m *** LDAP_REPLICATION_CONFIG_SYNCPROV = binddn="cn=admin,cn=config" bindmethod=simple credentials="$LDAP_CONFIG_PASSWORD" searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical
+[36mldap_1  |[0m *** LDAP_RFC2307BIS_SCHEMA = False
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS = #COMPLEX_BASH_ENV:TABLE: LDAP_REPLICATION_HOSTS_ROW_1 LDAP_REPLICATION_HOSTS_ROW_2
+[36mldap_1  |[0m *** LDAP_CONFIG_PASSWORD = config
+[36mldap_1  |[0m *** LDAP_TLS_CIPHER_SUITE = SECURE256:+SECURE128:-VERS-TLS-ALL:+VERS-TLS1.2:-RSA:-DHE-DSS:-CAMELLIA-128-CBC:-CAMELLIA-256-CBC
+[36mldap_1  |[0m *** LDAP_TLS_ENFORCE = False
+[36mldap_1  |[0m *** ------------------------------------------
+[36mldap_1  |[0m *** Running /container/run/startup/slapd...
+[36mldap_1  |[0m *** ------------ Environment dump ------------
+[36mldap_1  |[0m *** LDAP_LOG_LEVEL = 256
+[36mldap_1  |[0m *** SSL_HELPER_AUTO_RENEW_SERVICES_IMPACTED = slapd
+[36mldap_1  |[0m *** LDAP_REPLICATION = False
+[36mldap_1  |[0m *** LDAP_READONLY_USER_PASSWORD = readonly
+[36mldap_1  |[0m *** LC_CTYPE = en_US.UTF-8
+[36mldap_1  |[0m *** LDAP_ADMIN_PASSWORD = admin
+[36mldap_1  |[0m *** INITRD = no
+[36mldap_1  |[0m *** PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[36mldap_1  |[0m *** LDAP_REPLICATION_DB_SYNCPROV = binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials="$LDAP_ADMIN_PASSWORD" searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical
+[36mldap_1  |[0m *** HOME = /root
+[36mldap_1  |[0m *** LDAP_SSL_HELPER_PREFIX = ldap
+[36mldap_1  |[0m *** LDAP_BASE_DN = dc=esco-centre,dc=fr
+[36mldap_1  |[0m *** LDAP_TLS_VERIFY_CLIENT = demand
+[36mldap_1  |[0m *** LANG = en_US.UTF-8
+[36mldap_1  |[0m *** LDAP_READONLY_USER = False
+[36mldap_1  |[0m *** CONTAINER_SERVICE_DIR = /container/service
+[36mldap_1  |[0m *** LANGUAGE = en_US:en
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS_ROW_1 = ldap://ldap.example.org
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS_ROW_2 = ldap://ldap2.example.org
+[36mldap_1  |[0m *** LDAP_READONLY_USER_USERNAME = readonly
+[36mldap_1  |[0m *** LDAP_TLS_KEY_FILENAME = ldap.key
+[36mldap_1  |[0m *** LDAP_DOMAIN = esco-centre.fr
+[36mldap_1  |[0m *** LDAP_REMOVE_CONFIG_AFTER_SETUP = True
+[36mldap_1  |[0m *** LDAP_BACKEND = bdb
+[36mldap_1  |[0m *** LDAP_TLS = True
+[36mldap_1  |[0m *** LDAP_NOFILE = 1024
+[36mldap_1  |[0m *** LDAP_ORGANISATION = Example Inc.
+[36mldap_1  |[0m *** CONTAINER_LOG_LEVEL = 4
+[36mldap_1  |[0m *** LC_ALL = en_US.UTF-8
+[36mldap_1  |[0m *** KEEP_EXISTING_CONFIG = False
+[36mldap_1  |[0m *** LDAP_TLS_CRT_FILENAME = ldap.crt
+[36mldap_1  |[0m *** HOSTNAME = e0600df7c74e
+[36mldap_1  |[0m *** CONTAINER_STATE_DIR = /container/run/state
+[36mldap_1  |[0m *** LDAP_TLS_CA_CRT_FILENAME = ca.crt
+[36mldap_1  |[0m *** LDAP_REPLICATION_CONFIG_SYNCPROV = binddn="cn=admin,cn=config" bindmethod=simple credentials="$LDAP_CONFIG_PASSWORD" searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical
+[36mldap_1  |[0m *** LDAP_RFC2307BIS_SCHEMA = False
+[36mldap_1  |[0m *** LDAP_REPLICATION_HOSTS = #COMPLEX_BASH_ENV:TABLE: LDAP_REPLICATION_HOSTS_ROW_1 LDAP_REPLICATION_HOSTS_ROW_2
+[36mldap_1  |[0m *** LDAP_CONFIG_PASSWORD = config
+[36mldap_1  |[0m *** LDAP_TLS_CIPHER_SUITE = SECURE256:+SECURE128:-VERS-TLS-ALL:+VERS-TLS1.2:-RSA:-DHE-DSS:-CAMELLIA-128-CBC:-CAMELLIA-256-CBC
+[36mldap_1  |[0m *** LDAP_TLS_ENFORCE = False
+[36mldap_1  |[0m *** ------------------------------------------
+[36mldap_1  |[0m Database and config directory are empty...
+[36mldap_1  |[0m Init new ldap server...
+[36mldap_1  |[0m invoke-rc.d: could not determine current runlevel
+[36mldap_1  |[0m invoke-rc.d: policy-rc.d denied execution of stop.
+[36mldap_1  |[0m   Backing up /etc/ldap/slapd.d in /var/backups/slapd-2.4.44+dfsg-5+deb9u2... done.
+[36mldap_1  |[0m   Creating initial configuration... done.
+[36mldap_1  |[0m   Creating LDAP directory... done.
+[36mldap_1  |[0m invoke-rc.d: could not determine current runlevel
+[36mldap_1  |[0m invoke-rc.d: policy-rc.d denied execution of start.
+[36mldap_1  |[0m Start OpenLDAP...
+[36mldap_1  |[0m Waiting for OpenLDAP to start...
+[36mldap_1  |[0m 5c3ca8f8 @(#) $OpenLDAP: slapd  (May 23 2018 04:25:19) $
+[36mldap_1  |[0m 	Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+[36mldap_1  |[0m 5c3ca8f8 daemon: bind(8) failed errno=99 (Cannot assign requested address)
+[36mldap_1  |[0m 5c3ca8f8 slapd starting
+[36mldap_1  |[0m Add bootstrap schemas...
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=1 ADD dn="cn=ppolicy,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1000 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=ppolicy,cn=schema,cn=config"
+[36mldap_1  |[0m config file testing succeeded
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/05-ldappc.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=1 SEARCH RESULT tag=101 err=0 nentries=6 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1001 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=1 ADD dn="cn=05-ldappc,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1002 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=05-ldappc,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/11-esco-const.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=1 SEARCH RESULT tag=101 err=0 nentries=7 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1003 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=1 ADD dn="cn=11-esco-const,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1004 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=11-esco-const,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/13-esco-personne.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=1 SEARCH RESULT tag=101 err=0 nentries=8 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1005 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=1 ADD dn="cn=13-esco-personne,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1006 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=13-esco-personne,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/16-esco-addons.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=1 SEARCH RESULT tag=101 err=0 nentries=9 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1007 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=1 ADD dn="cn=16-esco-addons,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1008 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=16-esco-addons,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/17-esco-structure.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=1 SEARCH RESULT tag=101 err=0 nentries=10 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1009 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=1 ADD dn="cn=17-esco-structure,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1010 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=17-esco-structure,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/21-esco-groupe.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=1 SEARCH RESULT tag=101 err=0 nentries=11 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1011 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=1 ADD dn="cn=21-esco-groupe,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1012 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=21-esco-groupe,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/31-esco-mail.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 connection_input: conn=1013 deferring operation: binding
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=1 SEARCH RESULT tag=101 err=0 nentries=12 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1013 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 connection_input: conn=1014 deferring operation: binding
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=1 ADD dn="cn=31-esco-mail,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1014 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=31-esco-mail,cn=schema,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/schema/51-esco-application.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 connection_input: conn=1015 deferring operation: binding
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=1 SRCH base="cn=schema,cn=config" scope=2 deref=0 filter="(objectClass=*)"
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=1 SRCH attr=cn
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=1 SEARCH RESULT tag=101 err=0 nentries=13 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1015 fd=15 closed
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 connection_input: conn=1016 deferring operation: binding
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=1 ADD dn="cn=51-esco-application,cn=schema,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=1 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1016 fd=15 closed
+[36mldap_1  |[0m adding new entry "cn=51-esco-application,cn=schema,cn=config"
+[36mldap_1  |[0m Add image bootstrap ldif...
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/01-config-password.ldif
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/01-config-password.ldif
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=1 MOD dn="cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=1 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=2 MOD dn="olcDatabase={0}config,cn=config"
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=2 MOD attr=olcRootPW
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=2 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 op=3 UNBIND
+[36mldap_1  |[0m 5c3ca8f8 conn=1017 fd=15 closed
+[36mldap_1  |[0m modifying entry "cn=config"
+[36mldap_1  |[0m 
+[36mldap_1  |[0m modifying entry "olcDatabase={0}config,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/02-security.ldif
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/02-security.ldif
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 connection_input: conn=1018 deferring operation: binding
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=1 MOD dn="olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=1 MOD attr=olcAccess olcAccess
+[36mldap_1  |[0m 5c3ca8f9 slapd: line 0: rootdn is always granted unlimited privileges.
+[36mldap_1  |[0m 5c3ca8f9 slapd: line 0: rootdn is always granted unlimited privileges.
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=1 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f9 conn=1018 fd=15 closed
+[36mldap_1  |[0m modifying entry "olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/03-memberOf.ldif
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/03-memberOf.ldif
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=1 MOD dn="cn=module{0},cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=1 MOD attr=olcModuleLoad
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=1 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=2 ADD dn="olcOverlay={0}memberof,olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=2 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 op=3 UNBIND
+[36mldap_1  |[0m 5c3ca8f9 conn=1019 fd=15 closed
+[36mldap_1  |[0m modifying entry "cn=module{0},cn=config"
+[36mldap_1  |[0m 
+[36mldap_1  |[0m adding new entry "olcOverlay={0}memberof,olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/04-refint.ldif
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/04-refint.ldif
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=1 MOD dn="cn=module{0},cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=1 MOD attr=olcModuleLoad
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=1 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=2 ADD dn="olcOverlay={1}refint,olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=2 RESULT tag=105 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 op=3 UNBIND
+[36mldap_1  |[0m 5c3ca8f9 conn=1020 fd=15 closed
+[36mldap_1  |[0m modifying entry "cn=module{0},cn=config"
+[36mldap_1  |[0m 
+[36mldap_1  |[0m adding new entry "olcOverlay={1}refint,olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/05-index.ldif
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/05-index.ldif
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 fd=15 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=1 MOD dn="olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=1 MOD attr=olcDbIndex
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=1 RESULT tag=103 err=0 text=
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8f9 conn=1021 fd=15 closed
+[36mldap_1  |[0m modifying entry "olcDatabase={1}bdb,cn=config"
+[36mldap_1  |[0m Add custom bootstrap ldif...
+[36mldap_1  |[0m Processing file /container/service/slapd/assets/config/bootstrap/ldif/custom/05-groups.ldif
+[36mldap_1  |[0m 5c3ca8fa conn=1022 fd=18 ACCEPT from PATH=/var/run/slapd/ldapi (PATH=/var/run/slapd/ldapi)
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=0 BIND dn="" method=163
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=0 BIND authcid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" authzid="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=0 BIND dn="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" mech=EXTERNAL sasl_ssf=0 ssf=71
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=1 ADD dn="cn=esco:admin:local:admin_DE L IROISE_0291595B,ou=groups,dc=esco-centre,dc=fr"
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=1 RESULT tag=105 err=32 text=
+[36mldap_1  |[0m 5c3ca8fa conn=1022 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8fa conn=1022 fd=18 closed
+[36mldap_1  |[0m ldap_add: No such object (32)
+[36mldap_1  |[0m 	matched DN: dc=esco-centre,dc=fr
+[36mldap_1  |[0m adding new entry "cn=esco:admin:local:admin_DE L IROISE_0291595B,ou=groups,dc=esco-centre,dc=fr"
+[36mldap_1  |[0m 5c3ca8fa conn=1023 fd=18 ACCEPT from IP=127.0.0.1:42184 (IP=127.0.0.1:389)
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=0 BIND dn="cn=admin,dc=esco-centre,dc=fr" method=128
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=0 BIND dn="cn=admin,dc=esco-centre,dc=fr" mech=SIMPLE ssf=0
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=0 RESULT tag=97 err=0 text=
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=1 ADD dn="cn=esco:admin:local:admin_DE L IROISE_0291595B,ou=groups,dc=esco-centre,dc=fr"
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=1 RESULT tag=105 err=32 text=
+[36mldap_1  |[0m 5c3ca8fa conn=1023 op=2 UNBIND
+[36mldap_1  |[0m 5c3ca8fa conn=1023 fd=18 closed
+[36mldap_1  |[0m ldap_add: No such object (32)
+[36mldap_1  |[0m 	matched DN: dc=esco-centre,dc=fr
+[36mldap_1  |[0m adding new entry "cn=esco:admin:local:admin_DE L IROISE_0291595B,ou=groups,dc=esco-centre,dc=fr"
+[36mldap_1  |[0m *** /container/run/startup/slapd failed with status 32
+[36mldap_1  |[0m 
+[36mldap_1  |[0m *** Run commands before finish...
+[36mldap_1  |[0m *** Killing all processes...
+[36mldap_1  |[0m 5c3ca8fa daemon: shutdown requested and initiated.
+[36mldap_1  |[0m 5c3ca8fa slapd shutdown: waiting for 0 operations/tasks to finish
+[36mldap_1  |[0m 5c3ca8fa slapd stopped.
+[36mreciaenv_ldap_1 exited with code 0
+[0m

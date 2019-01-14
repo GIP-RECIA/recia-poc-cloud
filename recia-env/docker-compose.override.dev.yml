@@ -1,0 +1,6 @@
+version: '2.2'
+services:
+  ldap:
+    ports:
+      - "${DOCKER_DEVBOX_PORT_PREFIX}39:389"
+      - "${DOCKER_DEVBOX_PORT_PREFIX}69:689"
