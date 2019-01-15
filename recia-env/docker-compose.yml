@@ -1,6 +1,7 @@
 version: '2.2'
 networks:
   default:
+    external: true
     name: recia-env
 services:
   ldap:
