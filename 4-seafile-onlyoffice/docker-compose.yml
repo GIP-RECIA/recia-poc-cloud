@@ -1,4 +1,8 @@
 version: '2.2'
+networks:
+  recia-env:
+    external: true
+    name: recia-env
 services:
   seafile:
     build:
@@ -6,6 +10,9 @@ services:
       dockerfile: seafile/Dockerfile
     image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile'
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    networks:
+      - default
+      - recia-env
     volumes:
       - 'seafile-ccnet:/seafile/ccnet'
       - 'seafile-seafile-data:/seafile/seafile-data'

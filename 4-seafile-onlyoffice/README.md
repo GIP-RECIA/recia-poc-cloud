@@ -4,16 +4,16 @@ Seafile + Collabora CODE
 Installation
 ============
 
-- D√©marrer l'environnement.
+- DÈmarrer l'environnement.
 
 ```
 dc up -d
 ```
 
-*Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la proc√©dure 
-d'installation de seafile est automatiquement d√©clench√©e.*
+*Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la procÈdure 
+d'installation de seafile est automatiquement dÈclenchÈe.*
 
-- Se connecter √† [https://seafile.recia-cloud-4.test](https://seafile.recia-cloud-4.test) avec le compte `admin@example.com`/`admin`.
+- Se connecter ‡ [https://seafile.recia-cloud-4.test](https://seafile.recia-cloud-4.test) avec le compte `admin@example.com`/`admin`.
 
 - Activer OnlyOffice en ajoutant la configuration suivante au fichier `volumes/seafile-conf/seahub_settings.py`
 
@@ -26,7 +26,7 @@ ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt',
 ONLYOFFICE_EDIT_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods')
 ```
 
-Probl√®mes rencontr√©s
+ProblËmes rencontrÈs
 ====================
 
 - Images docker non officielle
@@ -34,4 +34,21 @@ Probl√®mes rencontr√©s
 Il n'y a pas d'image docker officielle fournie par le projet. Pour l'instant on utilise un fork de foxel/seafile, voir 
 [foxel/seafile-docker#6](https://github.com/foxel/seafile-docker/pull/6).
 
+LDAP
+====
 
+Pour la configuration LDAP, suivre la [documentation officielle](https://manual.seafile.com/deploy/using_ldap.html).
+
+- Ajouter dans le fichier `volumes/seafile-conf/ccnet.conf` la configuration LDAP
+
+```
+[LDAP]
+HOST = ldap://ldap.recia-env/
+BASE = ou=people,dc=esco-centre,dc=fr
+USER_DN = cn=admin,ou=administrateurs,dc=esco-centre,dc=fr
+PASSWORD = admin
+LOGIN_ATTR = mail
+FILTER = objectclass=ENTPerson
+```
+
+Limitation: Seafile can only use **email-address-format user identifiers**.

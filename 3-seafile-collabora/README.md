@@ -57,4 +57,21 @@ Problèmes rencontrés
 Il n'y a pas d'image docker officielle fournie par le projet. Pour l'instant on utilise un fork de foxel/seafile, voir 
 [foxel/seafile-docker#6](https://github.com/foxel/seafile-docker/pull/6).
 
+LDAP
+====
 
+Pour la configuration LDAP, suivre la [documentation officielle](https://manual.seafile.com/deploy/using_ldap.html).
+
+- Ajouter dans le fichier `volumes/seafile-conf/ccnet.conf` la configuration LDAP
+
+```
+[LDAP]
+HOST = ldap://ldap.recia-env/
+BASE = ou=people,dc=esco-centre,dc=fr
+USER_DN = cn=admin,ou=administrateurs,dc=esco-centre,dc=fr
+PASSWORD = admin
+LOGIN_ATTR = mail
+FILTER = objectclass=ENTPerson
+```
+
+Limitation: Seafile can only use **email-address-format user identifiers**.
