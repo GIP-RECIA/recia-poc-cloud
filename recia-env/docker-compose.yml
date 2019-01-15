@@ -1,5 +1,7 @@
 version: '2.2'
-
+networks:
+  default:
+    name: recia-env
 services:
   ldap:
     build:

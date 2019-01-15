@@ -13,7 +13,7 @@ services:
       - '${COMPOSE_PROJECT_DIR}/volumes/seafile-conf:/seafile/conf'
     environment:
       - 'SEAFILE_URL=https://seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
-      - 'MYSQL_HOST=seafile-db'
+      - 'MYSQL_HOST=seafile-db.${COMPOSE_NETWORK_NAME}'
       - 'MYSQL_USER=seafile'
       - 'MYSQL_USER_PASSWD=seafile'
       - 'MYSQL_ROOT_PASSWD=reciacloud'
