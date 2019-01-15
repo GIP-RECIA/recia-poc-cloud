@@ -32,3 +32,30 @@ dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.overri
 
 - Dans le menu **Paramètres** / **Administration** / **Collabora Online**, configurer l'url d'accès Collabora Online 
 `https://collabora.recia-cloud-1.test`.
+
+LDAP
+====
+
+Pour la configuration LDAP, suivre la [documentation officielle](https://docs.nextcloud.com/server/stable/admin_manual/configuration_user/user_auth_ldap.html).
+
+- Onglet Serveur
+
+| Propriété | Valeur |
+|--------|---|
+| Hôte | ldap.recia-env |
+| Port | 389 |
+| DN Utilisateur | cn=admin,ou=administrateurs,dc=esco-centre,dc=fr |
+| Mot de passe | admin |
+| DN de base | dc=esco-centre,dc=fr |
+
+- Onglet Utilisateurs
+
+Choisir les classes d'objets à autoriser, par exemple ENTPerson.
+
+- Attributs de login
+
+Choisir les attributs ldap utilisés pour le login.
+
+- Groupes
+
+Choisir les groupes à autoriser.

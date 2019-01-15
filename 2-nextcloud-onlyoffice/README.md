@@ -46,3 +46,31 @@ Modifier le fichier `/etc/onlyoffice/documentserver/default.json` `rejectUnautho
 
 Cette modification est intégrée au Dockerfile, et ne devrait pas être utilisée en production.
 
+
+LDAP
+====
+
+Pour la configuration LDAP, suivre la [documentation officielle](https://docs.nextcloud.com/server/stable/admin_manual/configuration_user/user_auth_ldap.html).
+
+- Onglet Serveur
+
+| Propriété | Valeur |
+|--------|---|
+| Hôte | ldap.recia-env |
+| Port | 389 |
+| DN Utilisateur | cn=admin,ou=administrateurs,dc=esco-centre,dc=fr |
+| Mot de passe | admin |
+| DN de base | dc=esco-centre,dc=fr |
+
+- Onglet Utilisateurs
+
+Choisir les classes d'objets à autoriser, par exemple ENTPerson.
+
+- Attributs de login
+
+Choisir les attributs ldap utilisés pour le login.
+
+- Groupes
+
+Choisir les groupes à autoriser.
+
