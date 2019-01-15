@@ -15,3 +15,8 @@ objectClass: organizationalUnit
 objectClass: top
 ou: people
 
+dn: ou=administrateurs,dc=esco-centre,dc=fr
+objectClass: organizationalUnit
+objectClass: top
+ou: administrateurs
+
