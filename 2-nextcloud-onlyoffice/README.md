@@ -13,7 +13,7 @@ dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.overri
 
 *Les prochains lancements pourront se faire avec `dc up -d` uniquement.*
 
-- Configurer les noms de domaine autorisés et l'URL publique dans le fichier `volumes/nextcloud/config/config.php`
+- Configurer les noms de domaine autorisés et l'URL publique dans le fichier `volumes/nextcloud-config/config.php`
 
 ```php
   'trusted_domains' => 
