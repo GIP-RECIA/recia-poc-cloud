@@ -34,6 +34,8 @@ RUN \
         "https://download.seadrive.org/seafile-server_${SEAFILE_VERSION}_x86-64.tar.gz" && \
     tar -xzf /tmp/seafile-server.tar.gz --strip-components=1 -C "${SEAFILE_PATH}" && \
     sed -ie '/^daemon/d' "${SEAFILE_PATH}/runtime/seahub.conf" && \
+    # Workaround for https://github.com/benoitc/gunicorn/issues/1857
+    echo "secure_scheme_headers = {'X-FORWARDED-PROTO': 'https'}">> "${SEAFILE_PATH}/runtime/seahub.conf" && \
     rm /tmp/seafile-server.tar.gz
 
 COPY seafile/etc/ /etc/
