@@ -4,16 +4,16 @@ Seafile + Collabora CODE
 Installation
 ============
 
-- Démarrer l'environnement.
+- DÃ©marrer l'environnement.
 
 ```
 dc up -d
 ```
 
-*Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la procédure 
-d'installation de seafile est automatiquement déclenchée.*
+*Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la procÃ©dure 
+d'installation de seafile est automatiquement dÃ©clenchÃ©e.*
 
-- Se connecter à [https://seafile.recia-cloud-4.test](https://seafile.recia-cloud-4.test) avec le compte `admin@example.com`/`admin`.
+- Se connecter Ã  [https://seafile.recia-cloud-4.test](https://seafile.recia-cloud-4.test) avec le compte `admin@example.com`/`admin`.
 
 - Activer OnlyOffice en ajoutant la configuration suivante au fichier `volumes/seafile-conf/seahub_settings.py`
 
@@ -26,7 +26,7 @@ ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt',
 ONLYOFFICE_EDIT_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods')
 ```
 
-Problèmes rencontrés
+ProblÃ¨mes rencontrÃ©s
 ====================
 
 - Images docker non officielle

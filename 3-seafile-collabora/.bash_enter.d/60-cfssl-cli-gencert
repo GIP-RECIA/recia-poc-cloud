@@ -19,7 +19,8 @@ if [[ -n "${DOCKER_DEVBOX_CFSSL_ENABLED}" && "${DOCKER_DEVBOX_CFSSL_ENABLED}" !=
             mkdir -p "$DESTINATION"
 
             echo "$(tput setaf 3)Generating SSL certificate for ${DOMAIN} with cfssl-cli$(tput sgr0)"
-            cfssl-cli gencert $CONFIG_OPTION --destination "$DESTINATION" "${DOMAIN}"
+            # shellcheck disable=SC2086
+            cfssl-cli gencert ${CONFIG_OPTION} --destination "$DESTINATION" "${DOMAIN}"
             echo "$(tput setaf 2)SSL certificate has been generated for ${DOMAIN}$(tput sgr0)"
         fi
      done
