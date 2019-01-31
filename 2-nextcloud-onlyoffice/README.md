@@ -68,7 +68,7 @@ Choisir les classes d'objets à autoriser, par exemple ENTPerson.
 
 - Attributs de login
 
-Choisir les attributs ldap utilisés pour le login.
+Choisir le ou les attributs ldap utilisés pour le login. (ENTPersonLogin)
 
 - Groupes
 

@@ -70,7 +70,7 @@ HOST = ldap://ldap.recia-env/
 BASE = ou=people,dc=esco-centre,dc=fr
 USER_DN = cn=admin,ou=administrateurs,dc=esco-centre,dc=fr
 PASSWORD = admin
-LOGIN_ATTR = mail
+LOGIN_ATTR = ENTPersonLogin
 FILTER = objectclass=ENTPerson
 ```
 
