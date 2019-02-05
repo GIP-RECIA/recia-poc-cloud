@@ -19,6 +19,15 @@ services:
       - '${COMPOSE_PROJECT_DIR}:/workdir'
       - 'ldap-data:/var/lib/ldap'
       - 'ldap-config:/etc/ldap/slapd.d'
+  cas:
+    build:
+      context: .docker
+      dockerfile: cas/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}recia-env/cas'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    depends_on:
+      - ldap
 volumes:
   ldap-data: null
   ldap-config: null

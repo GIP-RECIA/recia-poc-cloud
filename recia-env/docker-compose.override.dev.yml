@@ -3,5 +3,18 @@ services:
   ldap:
     ports:
       - "${DOCKER_DEVBOX_PORT_PREFIX}39:389"
-      - "${DOCKER_DEVBOX_PORT_PREFIX}69:689"
+      - "${DOCKER_DEVBOX_PORT_PREFIX}69:636"
     command: '--loglevel debug'
+  cas:
+    ports:
+      - "${DOCKER_DEVBOX_PORT_PREFIX}80:8080"
+      - "${DOCKER_DEVBOX_PORT_PREFIX}43:8443"
+    networks:
+      - default
+      - nginx-proxy
+    environment:
+      - 'VIRTUAL_HOST=cas.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - 'VIRTUAL_PORT=8080'
+networks:
+  nginx-proxy:
+    external: true
