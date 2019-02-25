@@ -12,9 +12,10 @@ Les environnements docker nécessitent [docker](https://www.docker.com) et
 Chaque environnement s'appuie sur un même squelette composé de scripts bash. Ces scripts bash apportent des 
 facilités dans l'utilisation et le déploiement des environnements docker.
 
-*Ces squelettes ont été générés par 
-[generator-docker-devbox](https://github.com/gfi-centre-ouest/generator-docker-devbox), un générateur yeoman maintenu 
-par GFI.*
+!!! note
+    Ces squelettes ont été générés par 
+    [generator-docker-devbox](https://github.com/gfi-centre-ouest/generator-docker-devbox), un générateur yeoman maintenu 
+    par GFI.
 
 ### nginx-proxy
 
@@ -26,8 +27,7 @@ Ce proxy permet d'accéder à différentes applications via HTTP/HTTPS, en discr
 
 Voici le script bash qui permet d'automatiser l'installation de nginx-proxy.
 
-```
-#!/bin/bash
+```bash
 NGINX_PROXY_HOME="${HOME}/.nginx-proxy"
 
 mkdir -p "${NGINX_PROXY_HOME}/vhost.d"
@@ -77,6 +77,6 @@ Avant d'installer ou de démarrer un environnement de démonstration, il est don
 
 Cet environnement communique avec les autres au travers du réseau docker nommé `recia-env`, à créer au préalable.
 
-```
+```bash
 docker network create recia-env
 ```

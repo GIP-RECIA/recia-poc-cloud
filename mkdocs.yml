@@ -9,5 +9,13 @@ theme:
   language: 'fr'
   name: 'material'
 
-docs_dir: mkdocs
-site_dir: docs
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+#  - pdf-export:
+#      combined: true
