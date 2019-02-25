@@ -1,0 +1,13 @@
+site_name: POC Cloud
+
+site_url: https://github.com/GIP-RECIA/recia-poc-cloud
+site_description: Gantt chart component for AngularJS
+
+repo_url: https://github.com/GIP-RECIA/recia-poc-cloud
+
+theme:
+  language: 'fr'
+  name: 'material'
+
+docs_dir: mkdocs
+site_dir: docs
