@@ -5,7 +5,7 @@ if [[ -f "$HOME/.gitconfig" ]]; then
   GITCONFIG_VOLUME="-v ${HOME}/.gitconfig:/root/.gitconfig"
 fi
 
-docker build mkdocs -t giprecia/mkdocs
+docker build docs -t giprecia/mkdocs
 
 docker run -ti --rm \
     --network nginx-proxy -e VIRTUAL_HOST=docs.recia-env.test -e VIRTUAL_PORT=8000 \
