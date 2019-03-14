@@ -13,5 +13,3 @@ Comptes enseignants
 -----------------
 
 - ana.bonnet / demo
-
-
