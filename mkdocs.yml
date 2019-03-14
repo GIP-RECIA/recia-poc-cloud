@@ -15,6 +15,27 @@ markdown_extensions:
   - toc:
       permalink: true
 
+nav:
+  - Accueil: index.md
+  - Synthèse: synthese.md
+  - LDAP: ldap.md
+  - CAS: cas.md
+  - Thèmes: themes.md
+  - Extensions: extensions.md
+  - API: api.md
+  - Docker: docker.md
+  - Pérénité: perenite.md
+  - Licenses: licenses.md
+  - RGPD: rgpd.md
+  - Performances: performances.md
+  - Applications natives: applications-natives.md
+  - UX: ux.md
+  - Antivirus: antivirus.md
+  - Sauvegarde: sauvegarde.md
+  - Stockages distribués: stockages-distribues.md
+  - Environnements: environnements.md
+  - Sources: sources.md
+
 plugins:
   - search
   - pdf-export:

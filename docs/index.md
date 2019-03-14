@@ -23,12 +23,26 @@ cette solution.
 2 Solutions de stockage sont comparées:
 
 * [nextcloud](https://nextcloud.com/), fork de owncloud développé en php
-* [seafile](https://www.seafile.com/), développé en python
+* [Seafile](https://www.Seafile.com/), développé en python
 
 2 Solutions d'édition collaborative en ligne sont comparées, dans leur version open source et sous licence libre:
 
 * [Collabora Online Development Edition](https://www.collaboraoffice.com/code/)
 * [OnlyOffice Community Edition](https://www.onlyoffice.com/fr/)
+
+!!! note Adhérence avec le SI
+    Les solutions d'édition n'ont pas d'adhérence avec le SI, et peuvent être installées sans difficultés 
+    particulière sur Nextcloud et sur Seafile. Le choix de la solution d'édition collaborative est donc beaucoup moins 
+    impactant en terme d'intégration, il est très simple de passer d'une solution à l'autre.
+    
+    A l'inverse, le choix d'une solution de stockage doit se faire en toute connaissance de cause pour faciliter 
+    l'intégration de l'environnement de l'ENT (CAS, LDAP, Theming en fonction du domain d'accès, etc ...), et il serait 
+    difficile de remplacer cette solution par la suite.
+    
+## Installation des environnements test
+
+Les environnements de tests peuvent être installés via Docker en suivante la [documentation associée](./environnements),
+et les fichiers README présents dans le repository github.
 
 ## A propos de cette documentation
 

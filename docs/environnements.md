@@ -1,4 +1,4 @@
-# Environnements docker
+# Environnements
 
 ## Prérequis
 
@@ -12,10 +12,10 @@ Les environnements docker nécessitent [docker](https://www.docker.com) et
 Chaque environnement s'appuie sur un même squelette composé de scripts bash. Ces scripts bash apportent des 
 facilités dans l'utilisation et le déploiement des environnements docker.
 
-!!! note
+!!! note "GFI contribue à l'OpenSource"
     Ces squelettes ont été générés par 
-    [generator-docker-devbox](https://github.com/gfi-centre-ouest/generator-docker-devbox), un générateur yeoman maintenu 
-    par GFI.
+    [generator-docker-devbox](https://github.com/gfi-centre-ouest/generator-docker-devbox), un générateur yeoman 
+    opensource créé et maintenu par GFI.
 
 ### nginx-proxy
 
@@ -61,8 +61,8 @@ et est constitué d'un dossier dans les sources du projet.
 
 * [Nextcloud + Collabora](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/1-nextcloud-collabora)
 * [Nextcloud + OnlyOffice](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/2-nextcloud-onlyoffice)
-* [Seafile + Collabora](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/3-seafile-collabora)
-* [Seafile + OnlyOffice](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/4-seafile-onlyoffice)
+* [Seafile + Collabora](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/3-Seafile-collabora)
+* [Seafile + OnlyOffice](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/4-Seafile-onlyoffice)
 
 Les instructions pour initialiser et démarrer ces environnements sont disponibles dans les fichiers README.md de chaque 
 dossier.
