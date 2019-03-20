@@ -10,7 +10,17 @@ NextCloud propose une fonctionnalité
 
 Parmis ces sources, on trouve même Nextcloud, qui permet de connecté un autre NextCloud à un NextCloud central.
 
-***A tester en POC***
+Cette fonctionnalité a été mise en place sur les environnements de test et fonctionne comme attendu.
+
+- Configurer les espaces de stockage NextCloud avec l'authentification "Identifiants de connexion, sauvegarder dans la base de données".
+
+- Activer l'option "Permettre le partage"
+
+- Désactiver la protection bruteforce via le fichier config.php si certains accès sont anormalement lents.
+
+```
+`auth.bruteforce.protection.enabled' => false
+```
 
 Seafile
 -------
