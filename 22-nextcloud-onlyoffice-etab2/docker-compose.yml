@@ -1,0 +1,51 @@
+version: '2.2'
+networks:
+  main:
+    external: true
+    name: recia_cloud_2_default
+services:
+  nextcloud:
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    networks:
+      - default
+      - main
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}/volumes/nextcloud-config:/var/www/html/config'
+      - 'nextcloud-custom-apps:/var/www/html/custom_apps'
+      - 'nextcloud-data:/var/www/html/data'
+      - 'nextcloud-themes:/var/www/html/themes'
+  nextcloud-db:
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud-db'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=reciacloud'
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}:/workdir'
+      - 'nextcloud-db:/var/lib/postgresql/data'
+  onlyoffice:
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/onlyoffice'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+  ldap:
+    image: '${DOCKER_DEVBOX_REGISTRY}recia-env/ldap'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+    environment:
+      - 'LDAP_BACKEND=bdb'
+      - 'LDAP_DOMAIN=esco-centre.fr'
+      - 'LDAP_BASE_DN=dc=esco-centre,dc=fr'
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}:/workdir'
+      - 'ldap-data:/var/lib/ldap'
+      - 'ldap-config:/etc/ldap/slapd.d'
+volumes:
+  nextcloud-custom-apps:
+  nextcloud-data:
+  nextcloud-themes:
+  nextcloud-db:
+  ldap-data:
+  ldap-config:

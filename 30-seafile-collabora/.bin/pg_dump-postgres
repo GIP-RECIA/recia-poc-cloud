@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+. "$DOCKER_DEVBOX_DIR/.bash.lib.d/50-docker"
+
+run --user postgres --workdir="$(_docker_workdir "/workdir")" nextcloud-db pg_dump --dbname=postgres://reciacloud:reciacloud@nextcloud-db/reciacloud "$@"
