@@ -1,4 +1,4 @@
-FROM nextcloud:14.0-apache
+FROM nextcloud:15.0-apache
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 
 {{#DOCKER_DEVBOX_CA_CERTIFICATES}}
@@ -10,7 +10,7 @@ RUN update-ca-certificates
 RUN apt-get update && apt-get install sudo && rm -rf /var/lib/apt/lists/*
 
 ADD nextcloud/occ-import-system-certs /usr/local/bin/occ-import-system-certs
-RUN chmod +x /usr/local/bin/occ-import-system-certs && occ-import-system-certs
+RUN chmod +x /usr/local/bin/occ-import-system-certs
 
 # Fix permissions to match host user
 RUN usermod -u ${HOST_UID:-1000} www-data && groupmod -g ${HOST_GID:-1000} www-data

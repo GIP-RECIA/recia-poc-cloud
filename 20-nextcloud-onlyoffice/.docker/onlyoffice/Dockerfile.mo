@@ -1,4 +1,4 @@
-FROM onlyoffice/documentserver:5.2.6.3
+FROM onlyoffice/documentserver:5.2.8.24
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 
 {{#DOCKER_DEVBOX_CA_CERTIFICATES}}

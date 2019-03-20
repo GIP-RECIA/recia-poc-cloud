@@ -31,7 +31,8 @@ dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.overri
 - Dans le menu **Applications**, ajouter l'application **ONLYOFFICE** (Catégorie *Bureautique & texte*)
 
 - Dans le menu **Paramètres** > **Administration** > **ONLYOFFICE**, configurer l'url d'accès Document Server 
-`https://onlyoffice.recia-cloud-2.test/`.
+`https://onlyoffice.recia-cloud-2.test/`. Dans les paramètres avancés, choisir Adresse du serveur pour les demandes 
+internes du service d'édition de document : `https://nextcloud.recia-cloud-2.test/`.
 
 Problèmes rencontrés
 ====================
