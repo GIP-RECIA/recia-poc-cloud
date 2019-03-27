@@ -17,6 +17,7 @@ services:
     volumes:
       - '${COMPOSE_PROJECT_DIR}/volumes/nextcloud-config:/var/www/html/config'
       - 'nextcloud-custom-apps:/var/www/html/custom_apps'
+      - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
       - 'nextcloud-data:/var/www/html/data'
       - 'nextcloud-themes:/var/www/html/themes'
   nextcloud-db:

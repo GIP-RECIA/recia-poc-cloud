@@ -60,6 +60,15 @@ NextCloud.
 dc exec nextcloud occ-import-system-certs
 ```
 
+- Certains patchs sont à appliquer sur les sources de NextCloud. Les patchs sont présents dans le dossier 
+`.docker/nextcloud/patches` et correspondent à des Pull Requests ouverts sur le 
+[github de nextcloud](https://github.com/nextcloud/docker). Ces patchs sont copiés dans le container et peuvent être 
+appliqués avec la commande suivante.
+
+```
+dc exec nextcloud apply-nextcloud-patches
+```
+
 LDAP
 ====
 

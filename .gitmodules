@@ -1,0 +1,3 @@
+[submodule "nextcloud-custom-apps/nextcloud-recia-custom"]
+	path = nextcloud-custom-apps/nextcloud-recia-custom
+	url = https://github.com/GIP-RECIA/nextcloud-recia-custom.git
