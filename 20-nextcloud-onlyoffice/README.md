@@ -103,8 +103,13 @@ Choisir les groupes à autoriser.
 Environnements etablissements
 =============================
 
-- External storage cause des problèmes avec la protection bruteforce, il faut donc configurer le paramètre suivant dans config.php.
+- Installer le plugin External Storage sur tous les environnements.
 
+- External storage cause des problèmes avec la protection bruteforce, il faut donc configurer le paramètre suivant 
+dans le fichier `config.php`.
+
+```
 'auth.bruteforce.protection.enabled' => false
+```
 
 

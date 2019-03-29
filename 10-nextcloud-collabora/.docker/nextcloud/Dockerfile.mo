@@ -9,8 +9,34 @@ RUN update-ca-certificates
 # occ commands should be performed with "sudo -u www-data"
 RUN apt-get update && apt-get install sudo && rm -rf /var/lib/apt/lists/*
 
+# Add xdebug to remote debug custom apps
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+
 ADD nextcloud/occ-import-system-certs /usr/local/bin/occ-import-system-certs
 RUN chmod +x /usr/local/bin/occ-import-system-certs
 
+COPY nextcloud/patches /patches
+ADD nextcloud/apply-nextcloud-patches /usr/local/bin/apply-nextcloud-patches
+RUN chmod +x /usr/local/bin/apply-nextcloud-patches
+
 # Fix permissions to match host user
 RUN usermod -u ${HOST_UID:-1000} www-data && groupmod -g ${HOST_GID:-1000} www-data
+
+# Write permission issue workaround
+RUN mkdir /var/www/html/config
+RUN mkdir /var/www/html/custom_apps
+RUN mkdir /var/www/html/data
+RUN mkdir /var/www/html/themes
+RUN chown -R www-data:root /var/www/html
+
+VOLUME /var/www/html/config
+VOLUME /var/www/html/custom_apps
+VOLUME /var/www/html/data
+VOLUME /var/www/html/themes
+
+ADD nextcloud/custom-entrypoint.sh /custom-entrypoint.sh
+ENTRYPOINT ["/custom-entrypoint.sh"]
+CMD ["apache2-foreground"]
