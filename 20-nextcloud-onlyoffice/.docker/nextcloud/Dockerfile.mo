@@ -24,3 +24,19 @@ RUN chmod +x /usr/local/bin/apply-nextcloud-patches
 
 # Fix permissions to match host user
 RUN usermod -u ${HOST_UID:-1000} www-data && groupmod -g ${HOST_GID:-1000} www-data
+
+# Write permission issue workaround
+RUN mkdir /var/www/html/config
+RUN mkdir /var/www/html/custom_apps
+RUN mkdir /var/www/html/data
+RUN mkdir /var/www/html/themes
+RUN chown -R www-data:root /var/www/html
+
+VOLUME /var/www/html/config
+VOLUME /var/www/html/custom_apps
+VOLUME /var/www/html/data
+VOLUME /var/www/html/themes
+
+ADD nextcloud/custom-entrypoint.sh /custom-entrypoint.sh
+ENTRYPOINT ["/custom-entrypoint.sh"]
+CMD ["apache2-foreground"]
