@@ -33,6 +33,19 @@ dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.overri
 - Dans le menu **Paramètres** > **Administration** > **Collabora Online**, configurer l'url d'accès Collabora Online 
 `https://collabora.recia-cloud-1.test`.
 
+
+Problèmes rencontrés
+====================
+
+- Certains patchs sont à appliquer sur les sources de NextCloud. Les patchs sont présents dans le dossier 
+`.docker/nextcloud/patches` et correspondent à des Pull Requests ouverts sur le 
+[github de nextcloud](https://github.com/nextcloud/docker). Ces patchs sont copiés dans le container et peuvent être 
+appliqués avec la commande suivante.
+
+```
+dc exec nextcloud apply-nextcloud-patches
+```
+
 LDAP
 ====
 
