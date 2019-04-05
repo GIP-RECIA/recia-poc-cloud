@@ -1,4 +1,4 @@
-cas.server.name=https://cas.recia-env.test
+cas.server.name=https://cas.{{DOCKER_DEVBOX_DOMAIN_PREFIX}}.{{DOCKER_DEVBOX_DOMAIN}}
 cas.server.prefix=${cas.server.name}/cas
 
 # Configuration for reverse proxy (https://apereo.github.io/2018/11/16/cas60-gettingstarted-overlay/)
@@ -23,8 +23,8 @@ cas.authn.ldap[0].bindDn=cn=admin,ou=administrateurs,dc=esco-centre,dc=fr
 cas.authn.ldap[0].bindCredential=admin
 cas.authn.ldap[0].principalAttributeList=uid,cn,sn,givenName,displayName,mail,ENTPersonLogin
 
-cas.authn.samlIdp.entityId=https://cas.recia-env.test/cas/idp
-cas.authn.samlIdp.scope=recia-env.test
+cas.authn.samlIdp.entityId=https://cas.{{DOCKER_DEVBOX_DOMAIN_PREFIX}}.{{DOCKER_DEVBOX_DOMAIN}}/cas/idp
+cas.authn.samlIdp.scope={{DOCKER_DEVBOX_DOMAIN_PREFIX}}.{{DOCKER_DEVBOX_DOMAIN}}
 
 cas.tgc.crypto.encryption.key=TqKknq1PPCbjsS8vWkfDh3bD4403SfjHUz9ZKeZgOIM
 cas.tgc.crypto.signing.key=LHYT5DFvEgqZlbpUn9Uju6r2XQxp48Max207-FS6RLwTrjmoqDh2tnqotrHMUIaOyiLcDBvraBm50qAehDcivg

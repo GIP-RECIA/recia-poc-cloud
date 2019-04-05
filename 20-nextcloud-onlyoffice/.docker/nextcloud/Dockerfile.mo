@@ -24,6 +24,7 @@ RUN chmod +x /usr/local/bin/apply-nextcloud-patches
 
 # Fix permissions to match host user
 RUN usermod -u ${HOST_UID:-1000} www-data && groupmod -g ${HOST_GID:-1000} www-data
+RUN mkdir -p /var/cache/apache2 && chown -R www-data:www-data /var/cache/apache2
 
 # Write permission issue workaround
 RUN mkdir /var/www/html/config

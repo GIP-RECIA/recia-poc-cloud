@@ -28,6 +28,10 @@ services:
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     depends_on:
       - ldap
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}/cas-services:/etc/cas/services'
+      - '${COMPOSE_PROJECT_DIR}/cas-keystore/thekeystore:/etc/cas/thekeystore'
+      - '${COMPOSE_PROJECT_DIR}/cas-saml:/etc/cas/saml'
 volumes:
   ldap-data: null
   ldap-config: null

@@ -1,0 +1,14 @@
+{
+  "@class": "org.apereo.cas.support.saml.services.SamlRegisteredService",
+  "serviceId": "https://nextcloud.recia-cloud-2.test/index.php/apps/user_saml/saml/metadata",
+  "name": "HTTPS (SAML)",
+  "metadataLocation" : "https://nextcloud.recia-cloud-2.test/index.php/apps/user_saml/saml/metadata",
+  "id": 10000002,
+  "usernameAttributeProvider": {
+    "@class": "org.apereo.cas.services.PrincipalAttributeRegisteredServiceUsernameProvider",
+    "usernameAttribute": "uid"
+  },
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}

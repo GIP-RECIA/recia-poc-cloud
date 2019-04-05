@@ -76,3 +76,7 @@ Choisir le ou les attributs ldap utilisés pour le login. (ENTPersonLogin)
 - Groupes
 
 Choisir les groupes à autoriser.
+
+- Dans l'onglet Expert
+
+Choisir au niveau de la section "Passer outre la détection des UUID", Attribut UUID pour les Utilisateurs: `uid`.

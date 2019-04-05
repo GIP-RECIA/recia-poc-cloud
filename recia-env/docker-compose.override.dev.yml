@@ -9,6 +9,8 @@ services:
     ports:
       - "${DOCKER_DEVBOX_PORT_PREFIX}80:8080"
       - "${DOCKER_DEVBOX_PORT_PREFIX}43:8443"
+    # - "${DOCKER_DEVBOX_PORT_PREFIX}05:5005"
+    #command: "./gradlew remoteDebug" # Use remote debug task to enable CAS remote debug on tcp/5005
     networks:
       - default
       - nginx-proxy

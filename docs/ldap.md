@@ -21,6 +21,10 @@ champs pour le Quota, l'email de l'utilisateur. Il est également possible de mo
 Des champs supplémentaires pourraient être ajoutés aux groupes LDAP pour proposer des libellés plus parlants que le 
 `cn`.
 
+Pour optimiser les performances de la synchronisation LDAP, il est préférable de 
+[programmer une tâche Cron](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/background_jobs_configuration.html) 
+associée dans NextCloud afin de précharger les données LDAP dans la base de données.
+
 Intégration avancé
 ------------------
 

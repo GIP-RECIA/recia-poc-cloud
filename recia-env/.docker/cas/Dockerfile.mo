@@ -16,10 +16,12 @@ WORKDIR /cas-overlay
 RUN ./gradlew --version
 
 COPY cas/build.gradle /cas-overlay
+COPY cas/gradle.properties /cas-overlay
+COPY cas/gradle /cas-overlay/gradle
+
 RUN ./gradlew clean build
 
 COPY cas/config/* /cas-overlay/etc/cas/config/
-COPY cas/services/* /cas-overlay/etc/cas/services/
 
 RUN ./gradlew copyCasConfiguration
 

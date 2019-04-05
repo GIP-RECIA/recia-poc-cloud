@@ -1,0 +1,27 @@
+task remoteDebug(group: "build", description: "Debug the CAS web application in embedded mode on port 5005") {
+    dependsOn build
+    doLast {
+        logger.info "Remote debugging process is started, listening on port 5005."
+        def casArgs = Arrays.asList("-Xmx2048M -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005".split(" "))
+        javaexec {
+            main = "-jar"
+            jvmArgs = casArgs
+            args = ["build/libs/${casWebApplicationBinaryName}"]
+            logger.info "Started ${commandLine}"
+        }
+    }
+}
+
+task remoteDebugSuspended(group: "build", description: "Debug the CAS web application in embedded mode on port 5005") {
+    dependsOn build
+    doLast {
+        logger.info "Remote debugging process is started in suspended mode, listening on port 5005."
+        def casArgs = Arrays.asList("-Xmx2048M -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005".split(" "))
+        javaexec {
+            main = "-jar"
+            jvmArgs = casArgs
+            args = ["build/libs/${casWebApplicationBinaryName}"]
+            logger.info "Started ${commandLine}"
+        }
+    }
+}

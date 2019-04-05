@@ -4,3 +4,4 @@
 /.init/
 /.bash_enter.env
 /.bin/jq
+/cas-saml/metadata-backups
