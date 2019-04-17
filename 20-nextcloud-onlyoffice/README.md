@@ -73,6 +73,9 @@ appliqués avec la commande suivante.
 dc exec nextcloud apply-nextcloud-patches
 ```
 
+- Lors d'un scan positif a l'antivirus, le message d'erreur affiché n'est pas approprié 
+(Voir [issue Github](https://github.com/nextcloud/files_antivirus/issues/119))
+
 LDAP
 ====
 
@@ -138,6 +141,17 @@ configuration directement en base de données pour passer en mode SAML.
 INSERT INTO appconfig (appid, configkey, configvalue) VALUES('user_saml', 'type', 'environment-variable');
 UPDATE appconfig SET configvalue='saml' WHERE appid='user_saml' AND configkey='type';
 ```
+
+Antivirus ClamAV
+================
+
+Pour la configuration Antivirus, activer le plugin "Antivirus for files", puis paramétrer dans "Paramètres > Sécurité"
+
+- Mode: `Processus`
+- Hôte: `clamav`
+- Port: `3310`
+
+Les fichiers seront automatiquement analysés à chaque transfert.
 
 Environnements etablissements
 =============================

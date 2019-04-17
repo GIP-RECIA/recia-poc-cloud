@@ -24,6 +24,9 @@ services:
     image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/onlyoffice'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
+  clamav:
+    image: mk0x/docker-clamav:alpine
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
   ldap:
     image: '${DOCKER_DEVBOX_REGISTRY}recia-env/ldap'
     init: true

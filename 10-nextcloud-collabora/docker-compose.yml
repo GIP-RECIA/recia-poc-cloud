@@ -48,6 +48,9 @@ services:
       - 'username=admin'
       - 'password=S3cRet'
       - 'extra_params=--o:ssl.enable=false --o:ssl.termination=true'
+  clamav:
+    image: mk0x/docker-clamav:alpine
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
 volumes:
   nextcloud-custom-apps:
   nextcloud-data:
