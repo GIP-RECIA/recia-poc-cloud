@@ -13,7 +13,7 @@ dc up -d
 *Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la procédure 
 d'installation de seafile est automatiquement déclenchée.*
 
-- Se connecter à [https://seafile.recia-cloud-3.test](https://seafile.recia-cloud-3.test) avec le compte `admin@example.com`/`admin`.
+- Se connecter à [https://seafile.pce-cloud-3.test](https://seafile.pce-cloud-3.test) avec le compte `admin@example.com`/`admin`.
 
 - Activer Collabora en ajoutant la configuration suivante au fichier `volumes/seafile-conf/seahub_settings.py`
 
@@ -28,7 +28,7 @@ ENABLE_OFFICE_WEB_APP = True
 # Url of LibreOffice Online's discovery page
 # The discovery page tells Seafile how to interact with LibreOffice Online when view file online
 # You should change `https://collabora-online.seafile.com/hosting/discovery` to your actual LibreOffice Online server address
-OFFICE_WEB_APP_BASE_URL = 'https://collabora.recia-cloud-3.test/hosting/discovery'
+OFFICE_WEB_APP_BASE_URL = 'https://collabora.pce-cloud-3.test/hosting/discovery'
 
 # Expiration of WOPI access token
 # WOPI access token is a string used by Seafile to determine the file's

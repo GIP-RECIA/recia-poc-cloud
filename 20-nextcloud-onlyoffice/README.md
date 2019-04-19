@@ -16,7 +16,7 @@ dc -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.overri
 - Configurer les noms de domaine autorisés et l'URL publique dans le fichier `volumes/nextcloud-config/config.php`
 
 ```php
-  'trusted_domains' => array ('nextcloud.recia-cloud-2.test'),
+  'trusted_domains' => array ('nextcloud.pce-cloud-2.test'),
 ```
 
 - Configurer les [trusted_proxies](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/reverse_proxy_configuration.html) 
@@ -27,16 +27,16 @@ si l'application est placée derrière un load balancer ou un reverse proxy.
 ```
 
 ```php
-  'overwrite.cli.url' => 'https://nextcloud.recia-cloud-2.test',
+  'overwrite.cli.url' => 'https://nextcloud.pce-cloud-2.test',
 ```
 
-- Se connecter à [https://nextcloud.recia-cloud-2.test](https://nextcloud.recia-cloud-2.test) avec le compte `admin`/`admin`.
+- Se connecter à [https://nextcloud.pce-cloud-2.test](https://nextcloud.pce-cloud-2.test) avec le compte `admin`/`admin`.
 
 - Dans le menu **Applications**, ajouter l'application **ONLYOFFICE** (Catégorie *Bureautique & texte*)
 
 - Dans le menu **Paramètres** > **Administration** > **ONLYOFFICE**, configurer l'url d'accès Document Server 
-`https://onlyoffice.recia-cloud-2.test/`. Dans les paramètres avancés, choisir Adresse du serveur pour les demandes 
-internes du service d'édition de document : `https://nextcloud.recia-cloud-2.test/`.
+`https://onlyoffice.pce-cloud-2.test/`. Dans les paramètres avancés, choisir Adresse du serveur pour les demandes 
+internes du service d'édition de document : `https://nextcloud.pce-cloud-2.test/`.
 
 Problèmes rencontrés
 ====================
