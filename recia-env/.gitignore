@@ -5,3 +5,5 @@
 /.bash_enter.env
 /.bin/jq
 /cas-saml/metadata-backups
+/cas-saml/idp-metadata.xml
+/cas-services/httpsWildcardSaml-10000002.json
