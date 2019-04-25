@@ -6,4 +6,4 @@
 
 /.docker/*/Dockerfile
 
-/nextcloud-config
+/nextcloud

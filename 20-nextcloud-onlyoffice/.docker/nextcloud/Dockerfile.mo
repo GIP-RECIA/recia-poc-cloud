@@ -1,4 +1,4 @@
-FROM nextcloud:15.0-apache
+FROM nextcloud:15.0.6-apache
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 
 {{#DOCKER_DEVBOX_CA_CERTIFICATES}}
@@ -33,10 +33,8 @@ RUN mkdir /var/www/html/data
 RUN mkdir /var/www/html/themes
 RUN chown -R www-data:root /var/www/html
 
-VOLUME /var/www/html/config
-VOLUME /var/www/html/custom_apps
-VOLUME /var/www/html/data
-VOLUME /var/www/html/themes
+# Downgrade is not supported, so faking the image version ...
+ADD https://github.com/nextcloud/server/raw/v15.0.7/version.php /usr/src/nextcloud/version.php
 
 ADD nextcloud/custom-entrypoint.sh /custom-entrypoint.sh
 ENTRYPOINT ["/custom-entrypoint.sh"]
