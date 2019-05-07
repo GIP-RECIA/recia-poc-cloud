@@ -1,6 +1,11 @@
+import random
+import string
+
+from gevent.pool import Pool
 from locust import task, HttpLocust, TaskSet, log
 from locust.clients import HttpSession
 from common.browser import Browser
+from common.webdav import Webdav
 
 
 class NextcloudUserBehaviour(TaskSet):
@@ -17,13 +22,34 @@ class NextcloudUserBehaviour(TaskSet):
     def client(self) -> HttpSession:
         return super().client
 
-    @task
-    def task1(self):
-        pass
+    @property
+    def requesttoken(self):
+        for history_item in reversed(self.browser.history):
+            requesttokenTag = history_item.dom.select_one('head[data-requesttoken]')
+            return requesttokenTag.attrs['data-requesttoken']
+        return None
 
-    @task
-    def task2(self):
-        pass
+    @task(1)
+    def browse_webdav(self):
+        pool = Pool(4)
+
+        webdav = Webdav(self.client, self.requesttoken)
+
+        for response in webdav.propfind('/remote.php/dav/files/admin/', deep=True):
+            if response.hasPreview:
+                pool.spawn(self.client.get, f'/core/preview?fileId={response.fileid}&c={response.etag}&x=250&y=250&forceIcon=0')
+
+        pool.join()
+
+    @task(5)
+    def upload_webdav(self):
+        webdav = Webdav(self.client, self.requesttoken)
+
+        letters = string.ascii_lowercase
+        filename = ''.join(random.choice(letters) for i in range(12))
+
+        data = ''.join(random.choice(letters) for i in range(1024 * 512))
+        webdav.put('/remote.php/dav/files/admin/' + filename, data.encode('utf-8'))
 
     def on_start(self):
         self.login()
@@ -34,10 +60,15 @@ class NextcloudUserBehaviour(TaskSet):
     def login(self):
         self.browser.navigate('/login')
         self.wait()
-        self.browser.follow("Direct log in")
+        self.browser.follow("Connexion directe")
+        login_form = self.browser.form('form')
+        values = login_form.values()
+        values['user'] = 'admin'
+        values['password'] = 'admin'
+        login_form.submit(values)
 
     def logout(self):
-        self.browser.follow()
+        self.browser.navigate('/logout')
 
 
 class NextcloudUser(HttpLocust):
