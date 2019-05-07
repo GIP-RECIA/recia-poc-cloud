@@ -6,6 +6,8 @@ services:
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     volumes:
       - '${COMPOSE_PROJECT_DIR}/nextcloud:/var/www/html'
+      - '${COMPOSE_PROJECT_DIR}/config:/config'
+      - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
       - 'nextcloud-data:/var/www/html/data'
   nextcloud-db:
@@ -26,7 +28,7 @@ services:
     image: mk0x/docker-clamav:alpine
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
   ldap:
-    image: '${DOCKER_DEVBOX_REGISTRY}recia-env/ldap'
+    image: '${DOCKER_DEVBOX_REGISTRY}pce-env/ldap'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     environment:

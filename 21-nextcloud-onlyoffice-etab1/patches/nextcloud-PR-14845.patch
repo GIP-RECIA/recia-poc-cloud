@@ -1,0 +1,30 @@
+From e8ecddd266b363d034bdcde2edfd836af6df889e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=A9mi=20Alvergnat?= <remi.alvergnat@gfi.fr>
+Date: Mon, 25 Mar 2019 18:01:51 +0100
+Subject: [PATCH] Prepend wildcard to the LDAP search term
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+It makes the LDAP user/group search behaves consistently with database backend
+
+See https://github.com/nextcloud/server/blob/3f4941e48aead48bacc7077e2819b492d1394778/lib/private/Group/Database.php#L270-L274
+
+Signed-off-by: Rémi Alvergnat <remi.alvergnat@gfi.fr>
+---
+ apps/user_ldap/lib/Access.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/apps/user_ldap/lib/Access.php b/apps/user_ldap/lib/Access.php
+index 1044938446e..16cc9ea8ddc 100644
+--- a/apps/user_ldap/lib/Access.php
++++ b/apps/user_ldap/lib/Access.php
+@@ -1557,7 +1557,7 @@ private function prepareSearchTerm($term) {
+ 		if ($term === '') {
+ 			$result = '*';
+ 		} else if ($allowEnum !== 'no') {
+-			$result = $term . '*';
++			$result = '*' . $term . '*';
+ 		}
+ 		return $result;
+ 	}

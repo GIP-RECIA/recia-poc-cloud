@@ -5,12 +5,6 @@ services:
       - 'XDEBUG_CONFIG=idekey=reciacloud remote_host=${HOST_IP}'
       - 'PHP_IDE_CONFIG=serverName=reciacloud'
       - 'VIRTUAL_HOST=nextcloud.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
-      - 'POSTGRES_DB=nextcloud'
-      - 'POSTGRES_USER=postgres'
-      - 'POSTGRES_PASSWORD=reciacloud'
-      - 'POSTGRES_HOST=nextcloud-db'
-      - 'NEXTCLOUD_ADMIN_USER=admin'
-      - 'NEXTCLOUD_ADMIN_PASSWORD=admin'
     networks:
       - default
       - nginx-proxy
@@ -20,7 +14,6 @@ services:
   collabora:
     environment:
       - 'VIRTUAL_HOST=collabora.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
-      - 'VIRTUAL_PORT=9980'
     networks:
       - default
       - nginx-proxy

@@ -6,4 +6,7 @@
 
 /.docker/*/Dockerfile
 
-/nextcloud-config
+/nextcloud
+/config/system.config.json
+/config/richdocuments.config.json
+/config/user_saml.config.json

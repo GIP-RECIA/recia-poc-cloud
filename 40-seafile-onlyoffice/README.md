@@ -43,7 +43,7 @@ Pour la configuration LDAP, suivre la [documentation officielle](https://manual.
 
 ```
 [LDAP]
-HOST = ldap://ldap.recia-env/
+HOST = ldap://ldap.pce-env/
 BASE = ou=people,dc=esco-centre,dc=fr
 USER_DN = cn=admin,ou=administrateurs,dc=esco-centre,dc=fr
 PASSWORD = admin

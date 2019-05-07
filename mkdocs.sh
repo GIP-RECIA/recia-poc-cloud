@@ -8,7 +8,7 @@ fi
 docker build docs -t giprecia/mkdocs
 
 docker run -ti --rm \
-    --network nginx-proxy -e VIRTUAL_HOST=docs.recia-env.test -e VIRTUAL_PORT=8000 \
+    --network nginx-proxy -e VIRTUAL_HOST=docs.pce-env.test -e VIRTUAL_PORT=8000 \
     $GITCONFIG_VOLUME \
     -v $(pwd):/docs \
     giprecia/mkdocs $@

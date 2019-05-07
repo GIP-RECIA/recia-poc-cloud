@@ -1,0 +1,9 @@
+{
+    "apps": {
+        "files_antivirus": {
+            "av_mode": "daemon",
+            "av_host": "clamav",
+            "av_port": "3310"
+        }
+    }
+}

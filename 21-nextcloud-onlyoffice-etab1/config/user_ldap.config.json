@@ -1,0 +1,18 @@
+{
+    "apps": {
+        "user_ldap": {
+            "s01ldap_host": "ldap.pce-env",
+            "s01ldap_port": "389",
+            "s01ldap_dn": "cn=admin,ou=administrateurs,dc=esco-centre,dc=fr",
+            "s01ldap_agent_password": "YWRtaW4=",
+            "s01ldap_base": "dc=esco-centre,dc=fr",
+            "s01ldap_configuration_active": "1",
+            "s01ldap_userfilter_objectclass": "ENTPerson", 
+            "s01ldap_userlist_filter": "(|(objectclass=ENTPerson))",
+            "s01ldap_loginfilter_username": "0",
+            "s01ldap_loginfilter_attributes": "ENTPersonLogin",
+            "s01ldap_login_filter": "(&(|(objectclass=ENTPerson))(|(ENTPersonLogin=%uid)))",
+            "s01ldap_expert_uuid_user_attr": "uid"
+        }
+    }
+}

@@ -67,16 +67,16 @@ et est constitué d'un dossier dans les sources du projet.
 Les instructions pour initialiser et démarrer ces environnements sont disponibles dans les fichiers README.md de chaque 
 dossier.
 
-Il existe également un cinquième environnement, [recia-env](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/recia-env), 
+Il existe également un cinquième environnement, [pce-env](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/pce-env), 
 qui contient les services utilisés pour démontrer l'intégration du système d'information de l'ENT (CAS, LDAP) dans
 les différentes solutions à évaluer.
 
 
 Avant d'installer ou de démarrer un environnement de démonstration, il est donc nécessaire que l'environnement
- recia-env soit installé et démarré.
+ pce-env soit installé et démarré.
 
-Cet environnement communique avec les autres au travers du réseau docker nommé `recia-env`, à créer au préalable.
+Cet environnement communique avec les autres au travers du réseau docker nommé `pce-env`, à créer au préalable.
 
 ```bash
-docker network create recia-env
+docker network create pce-env
 ```

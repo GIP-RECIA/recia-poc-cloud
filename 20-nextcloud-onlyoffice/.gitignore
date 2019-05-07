@@ -7,3 +7,6 @@
 /.docker/*/Dockerfile
 
 /nextcloud
+/config/system.config.json
+/config/onlyoffice.config.json
+/config/user_saml.config.json

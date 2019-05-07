@@ -18,7 +18,6 @@ RUN yes | pecl install xdebug \
 ADD nextcloud/occ-import-system-certs /usr/local/bin/occ-import-system-certs
 RUN chmod +x /usr/local/bin/occ-import-system-certs
 
-COPY nextcloud/patches /patches
 ADD nextcloud/apply-nextcloud-patches /usr/local/bin/apply-nextcloud-patches
 RUN chmod +x /usr/local/bin/apply-nextcloud-patches
 
@@ -28,14 +27,12 @@ RUN mkdir -p /var/cache/apache2 && chown -R www-data:www-data /var/cache/apache2
 
 # Write permission issue workaround
 RUN mkdir /var/www/html/config
-RUN mkdir /var/www/html/custom_apps
+RUN mkdir /var/www/html/custom_appsocc 
 RUN mkdir /var/www/html/data
 RUN mkdir /var/www/html/themes
 RUN chown -R www-data:root /var/www/html
 
-# Downgrade is not supported, so faking the image version ...
-ADD https://github.com/nextcloud/server/raw/v15.0.7/version.php /usr/src/nextcloud/version.php
-
 ADD nextcloud/custom-entrypoint.sh /custom-entrypoint.sh
+RUN chmod +x /custom-entrypoint.sh
 ENTRYPOINT ["/custom-entrypoint.sh"]
 CMD ["apache2-foreground"]
