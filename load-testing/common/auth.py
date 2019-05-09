@@ -1,4 +1,4 @@
-from random import choice
+from random import shuffle
 
 USERS = [
     "admin",
@@ -1601,8 +1601,21 @@ USERS = [
 ]
 
 
+def reset_users():
+    global USERS_STACK
+    USERS_STACK = list(USERS)
+    shuffle(USERS_STACK)
+
+
+USERS_STACK = USERS
+reset_users()
+
+
 def get_random_user():
-    return choice(USERS)
+    global USERS_STACK
+    if not USERS_STACK:
+        reset_users()
+    return USERS_STACK.pop()
 
 
 def get_user_password(user: str):

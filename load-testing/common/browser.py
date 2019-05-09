@@ -1,4 +1,5 @@
 from typing import Optional, Dict
+from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup, Tag
 from gevent.pool import Pool
@@ -6,30 +7,38 @@ from locust.clients import Response, HttpSession
 from locust.exception import LocustError
 
 
+class BrowserOptions:
+    def __init__(self):
+        self.download = True
+        self.history = False
+
+
 class Browser:
     def __init__(self, client: HttpSession):
         self.client = client
-        self.history = []  # type: list[GoResponse]
+        self.history = []  # type: list[HistoryItem]
         self.resources = Resources(client)
+        self.options = BrowserOptions()
 
     def dom(self, r: Response):
         dom = BeautifulSoup(r.content, 'html.parser', from_encoding=r.encoding)
         return dom
 
-    def navigate(self, url, download=True, history=True, **kwargs):
+    def navigate(self, url, **kwargs):
         response = self.client.get(url, **kwargs)
-        return self.handle_response(response, download, history)
+        return self.handle_response(response)
 
-    def handle_response(self, response, download=True, history=True):
+    def handle_response(self, response):
         if response.status_code != 200:
             raise LocustError()
 
         dom = self.dom(response)
-        resources = self.resources.get(dom, download)
-        go_response = GoResponse(resources, response, dom)
-        if history:
-            self.history.append(go_response)
-        return go_response
+        resources = self.resources.get(dom, self.options.download, response.request.url)
+        history_item = HistoryItem(resources, response, dom)
+        if not self.options.history:
+            self.history.clear()
+        self.history.append(history_item)
+        return history_item
 
     def form(self, selector=None, tag: Optional[Tag] = None):
         if not tag:
@@ -63,18 +72,26 @@ class Resources:
         self.links = {}  # type: dict[str, Optional[Response]]
         self.client = client
 
-    def get(self, dom: Tag, download=True):
+    def sanitize_url(self, baseurl, url):
+        if baseurl and url:
+            return urljoin(baseurl, url)
+        return url
+
+    def get(self, dom: Tag, download=True, baseurl=None):
         resources = Resources(self.client)
 
         for img in dom.findAll("img"):
             if "src" in img.attrs:
-                resources.images[img.attrs["src"]] = self.images.get(img.attrs["src"])
+                url = self.sanitize_url(baseurl, img.attrs["src"])
+                resources.images[url] = self.images.get(url)
         for script in dom.findAll("script"):
             if "src" in script.attrs:
-                resources.scripts[script.attrs["src"]] = self.scripts.get(script.attrs["src"])
+                url = self.sanitize_url(baseurl, script.attrs["src"])
+                resources.scripts[url] = self.scripts.get(url)
         for link in dom.findAll("link"):
             if "href" in link.attrs:
-                resources.links[link.attrs["href"]] = self.links.get(link.attrs["href"])
+                url = self.sanitize_url(baseurl, link.attrs["href"])
+                resources.links[url] = self.links.get(url)
 
         if download:
             pool = Pool(4)
@@ -102,7 +119,7 @@ class Resources:
         self.links.update(resources.links)
 
 
-class GoResponse:
+class HistoryItem:
     def __init__(self, resources: Resources, response: Response, dom: BeautifulSoup):
         self.resources = resources
         self.response = response
@@ -121,7 +138,7 @@ class Form:
                 values[input.attrs.get('name')] = input.attrs.get('value')
         return values
 
-    def submit(self, values: Dict[str, str], **kwargs) -> GoResponse:
+    def submit(self, values: Dict[str, str], **kwargs) -> HistoryItem:
         method = "get"
         action = self.browser.last.response.request.url
 
@@ -132,7 +149,7 @@ class Form:
             action = self.dom.attrs['action']
 
         if method == 'post':
-            return self.browser.handle_response(self.browser.client.post(action, values, **kwargs), download=True)
+            return self.browser.handle_response(self.browser.client.post(action, values, **kwargs))
         elif method == 'get':
             return self.browser.handle_response(self.browser.client.get(action, **kwargs))  # TODO: Encode values in URL
         else:
