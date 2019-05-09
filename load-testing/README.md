@@ -19,3 +19,11 @@ pipenv install
 ```
 
 
+Execution des tests
+-------------------
+
+```
+pipenv run locust -f nextcloud.py --host https://nextcloud.pce-cloud-1.asogfi.fr
+```
+
+Puis se connecter à http://localhost:8089 pour lancer le test de charge

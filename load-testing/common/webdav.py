@@ -3,6 +3,7 @@ from typing import Iterator
 from bs4 import BeautifulSoup, Tag
 from locust.clients import HttpSession
 from locust.exception import LocustError
+from requests import Response
 
 
 class PropfindResponse:
@@ -15,6 +16,12 @@ class PropfindResponse:
         self.etag = item_prop.find("d:getetag").text if item_prop.find("d:getetag") else None
         self.contentType = item_prop.find("d:getcontenttype").text if item_prop.find("d:getcontenttype") else None
         self.collection = bool(item_prop.select_one(r"d\:resourcetype > d\:collection"))
+
+
+class WebdavError(LocustError):
+    def __init__(self, *args, r: Response, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.r = r
 
 
 class Webdav:
@@ -57,10 +64,14 @@ class Webdav:
                 if deep and response.collection:
                     yield from self.propfind(response.href)
         else:
-            raise LocustError("Invalid status code: " + r.status_code)
+            raise WebdavError(f"Invalid response status code: {r.status_code}. {r.text}", r=r)
 
-    def put(self, url, data: bytes):
-        r = self.client.put(url, data,
-                        headers={"Content-Type": "application/octet-stream", "requesttoken": self.requesttoken})
-        if r.status_code != 201:
-            raise LocustError("Can't PUT file")
+    def put(self, url, data: bytes, **kwargs):
+        return self.client.put(url, data,
+                               headers={"requesttoken": self.requesttoken}, **kwargs)
+
+    def mkcol(self, url, **kwargs):
+        return self.client.request('MKCOL', url, headers={"requesttoken": self.requesttoken}, **kwargs)
+
+    def delete(self, url, **kwargs):
+        return self.client.delete(url, headers={"requesttoken": self.requesttoken}, **kwargs)
