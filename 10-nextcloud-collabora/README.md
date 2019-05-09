@@ -91,7 +91,6 @@ dc exec nextcloud apply-nextcloud-patches
 - Dans certains cas, il est nécessaire de générer à nouveau le fichier .htaccess (voir https://github.com/nextcloud/nextcloud-snap/issues/412)
 
 ```
-# Cette commande est intégrée dans l'entrypoint custom du Dockerfile nextcloud
 occ maintenance:update:htaccess
 ```
 

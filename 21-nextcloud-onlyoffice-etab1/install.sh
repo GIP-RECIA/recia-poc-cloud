@@ -21,3 +21,5 @@ occ config:import /config/user_ldap.config.json
 occ config:import /config/user_saml.config.json
 occ config:import /config/onlyoffice.config.json
 occ config:import /config/files_antivirus.config.json
+
+occ maintenance:update:htaccess
