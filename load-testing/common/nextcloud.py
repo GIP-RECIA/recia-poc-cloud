@@ -7,33 +7,14 @@ from common.auth import get_random_user, get_user_password
 from common.browser import Browser
 
 
-class NextcloudBase:
-    def login(self):
-        self.browser.navigate('/login')
-        self.wait()
-        self.browser.follow("Connexion directe")
-        login_form = self.browser.form('form')
-        values = login_form.values()
-
-        values['user'] = get_random_user()
-        values['password'] = get_user_password(values['user'])
-
-        login_form.submit(values)
-
-        self.browser.navigate('/')
-
-    def logout(self):
-        self.browser.navigate('/logout')
-
-
 class NextcloudBrowser(Browser):
     def __init__(self, client: HttpSession):
         super().__init__(client)
         self.requesttoken = None  # type: Optional[str]
         self.user = None  # type: Optional[str]
 
-    def navigate(self, url, **kwargs):
-        history_item = super().navigate(url, **kwargs)
+    def navigate(self, url, download=None, **kwargs):
+        history_item = super().navigate(url, download=download, **kwargs)
         requesttokenTag = history_item.dom.select_one('head[data-requesttoken]')
         if requesttokenTag:
             self.requesttoken = requesttokenTag.attrs['data-requesttoken']
@@ -55,6 +36,30 @@ class NextcloudBrowserExtension:
             self.browser = parent.browser
         else:
             self.browser = NextcloudBrowser(self.client)
+
+
+class NextcloudBase:
+    browser = None  # type: NextcloudBrowser
+
+    def login(self, fast=False):
+        if fast:
+            self.browser.navigate('/login?redirect_url=&direct=1')
+        else:
+            self.browser.navigate('/login')
+            self.browser.follow("Connexion directe")
+        login_form = self.browser.form('form')
+        values = login_form.values()
+
+        values['user'] = get_random_user()
+        values['password'] = get_user_password(values['user'])
+
+        login_form.submit(values)
+        self.browser.navigate('/')
+
+    def logout(self):
+        self.browser.navigate('/logout',
+                              name='/logout',
+                              params={'requesttoken': self.browser.requesttoken})
 
 
 class NextcloudBrowserTaskSet(TaskSet, NextcloudBase, NextcloudBrowserExtension):

@@ -26,10 +26,15 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
 
         pool = Pool(4)
 
-        for response in webdav.propfind(f'/remote.php/dav/files/{self.browser.user}/', deep=False):
+        for response in webdav.propfind(
+                f'/remote.php/dav/files/{self.browser.user}/',
+                name='/remote.php/dav/files/{user}',
+                deep=False):
             if response.hasPreview:
-                pool.spawn(self.client.get,
-                           f'/core/preview?fileId={response.fileid}&c={response.etag}&x=250&y=250&forceIcon=0')
+                pool.spawn(self.client.get, f'/core/preview',
+                           name='/core/preview',
+                           params={'fileId': response.fileid, 'c': response.etag, 'x': 250, 'y': 250, 'forceIcon': 0}
+                           )
 
         pool.join()
 
@@ -38,6 +43,7 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
         self.browser.navigate("/apps/activity")
 
         r = self.client.get("/ocs/v2.php/apps/activity/api/v2/activity/all?format=json&previews=true&since=0",
+                            name="/ocs/v2.php/apps/activity/api/v2/activity/all",
                             headers={"OCS-APIREQUEST": "true", "requesttoken": self.browser.requesttoken})
         if r.status_code != 200:
             raise LocustError("Invalid response for API activity/all")
@@ -47,12 +53,14 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
         self.browser.navigate("/apps/gallery")
 
         r = self.client.get("/apps/gallery/config",
+                            name="/apps/gallery/config",
                             headers={"OCS-APIREQUEST": "true", "requesttoken": self.browser.requesttoken})
         if r.status_code != 200:
             raise LocustError("Invalid response for API gallery/config")
         config = json.loads(r.text)
 
         r = self.client.get("/apps/gallery/files/list",
+                            name="/apps/gallery/files/list",
                             params={"location": "",
                                     "features": ';'.join(config.get('features')),
                                     "etag": "",
@@ -64,7 +72,11 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
 
         pool = Pool(4)
         for f in galleries['files']:
-            pool.spawn(self.client.get, f"/apps/gallery/preview/{f['nodeid']}?width=200&height=200")
+            pool.spawn(
+                self.client.get, f"/apps/gallery/preview/{f['nodeid']}",
+                name="/apps/gallery/preview/{nodeid}",
+                params={'width': 200, 'height': 200}
+            )
         pool.join()
 
     @task(1)
@@ -73,10 +85,15 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
 
         webdav = Webdav(self.client, self.browser.requesttoken)
 
-        for response in webdav.propfind(f'/remote.php/dav/files/{self.browser.user}/', deep=True):
+        for response in webdav.propfind(f'/remote.php/dav/files/{self.browser.user}/',
+                                        name="/remote.php/dav/files/{user}/",
+                                        deep=True):
             if response.hasPreview:
                 pool.spawn(self.client.get,
-                           f'/core/preview?fileId={response.fileid}&c={response.etag}&x=250&y=250&forceIcon=0')
+                           f'/core/preview',
+                           name='/core/preview',
+                           params={'fileId': response.fileid, 'c': response.etag, 'x': 250, 'y': 250, 'forceIcon': 0}
+                           )
 
         pool.join()
 
@@ -88,22 +105,39 @@ class NextcloudTaskSet(NextcloudBrowserTaskSet):
         filename = ''.join(random.choice(letters) for i in range(12))
 
         data = os.urandom(1024 * 512)
-        r = webdav.put(f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}', data, catch_response=True)
+        r = webdav.put(
+            f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}',
+            name='/remote.php/dav/files/{user}/Locust/{filename}',
+            data=data,
+            catch_response=True
+        )
         r.success()
         if r.status_code == 404:
-            webdav.mkcol(f'/remote.php/dav/files/{self.browser.user}/Locust')
-            webdav.put(f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}', data)
+            webdav.mkcol(
+                f'/remote.php/dav/files/{self.browser.user}/Locust',
+                name='/remote.php/dav/files/{user}/Locust',
+            )
+            webdav.put(
+                f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}',
+                name='/remote.php/dav/files/{user}/Locust/{filename}',
+                data=data)
 
-        webdav.delete(f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}')
-        webdav.delete(f'/remote.php/dav/files/{self.browser.user}/Locust')
+        webdav.delete(
+            f'/remote.php/dav/files/{self.browser.user}/Locust/{filename}',
+            name='/remote.php/dav/files/{user}/Locust/{filename}'
+        )
+        webdav.delete(
+            f'/remote.php/dav/files/{self.browser.user}/Locust',
+            name='/remote.php/dav/files/{user}/Locust'
+        )
 
 
 class NextcloudLocust(HttpLocust):
     task_set = NextcloudTaskSet
     host = 'https://nextcloud.pce-cloud-2.asogfi.fr'
 
-    min_wait = 5000
-    max_wait = 10000
+    min_wait = 1000
+    max_wait = 5000
 
 
 if __name__ == '__main__':

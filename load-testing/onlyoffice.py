@@ -1,6 +1,7 @@
 import json
 import random
 import string
+import time
 
 import pkg_resources
 from locust import task, HttpLocust
@@ -11,12 +12,15 @@ from common.webdav import Webdav
 
 
 class OnlyofficeTaskSet(NextcloudBrowserTaskSet):
+    min_wait = 250
+    max_wait = 500
+
     def __init__(self, parent):
         super().__init__(parent)
         self.browser.options.download = False
 
     def on_start(self):
-        self.login()
+        self.login(fast=True)
 
     def on_stop(self):
         self.logout()
@@ -30,27 +34,51 @@ class OnlyofficeTaskSet(NextcloudBrowserTaskSet):
 
         data = pkg_resources.resource_string(__name__, 'data/word.docx')
 
-        r = webdav.put(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}', data, catch_response=True)
+        r = webdav.put(
+            f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}',
+            name='/remote.php/dav/files/{user}/Onlyoffice/{filename}',
+            data=data,
+            catch_response=True)
         r.success()
         if r.status_code == 404:
-            webdav.mkcol(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice')
-            webdav.put(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}', data)
+            webdav.mkcol(
+                f'/remote.php/dav/files/{self.browser.user}/Onlyoffice',
+                name='/remote.php/dav/files/{user}/Onlyoffice'
+            )
+            webdav.put(
+                f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}',
+                name='/remote.php/dav/files/{user}/Onlyoffice/{filename}',
+                data=data
+            )
 
-        propfind = next(webdav.propfind(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}'))
+        propfind = next(webdav.propfind(
+            f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}',
+            name='/remote.php/dav/files/{user}/Onlyoffice/{filename}'
+        ))
 
-        r = self.browser.navigate(f"/apps/onlyoffice/{propfind.fileid}", params={"filePath": f"/Onlyoffice/{filename}"})
+        r = self.browser.navigate(
+            f"/apps/onlyoffice/{propfind.fileid}",
+            name="/apps/onlyoffice/{fileid}",
+            params={"filePath": f"/Onlyoffice/{filename}"}
+        )
         script = r.dom.select_one('.app-onlyoffice script')
         host = script.attrs['src'].replace('/web-apps/apps/api/documents/api.js', '')
 
         r = self.client.get(f"/apps/onlyoffice/ajax/config/{propfind.fileid}",
+                            name="/apps/onlyoffice/ajax/config/{fileid}",
                             params={"filePath": f"/Onlyoffice/{filename}"},
                             headers={'requesttoken': self.browser.requesttoken})
 
         config = json.loads(r.text)
 
         self.browser.navigate(
-            f'{host}/web-apps/apps/documenteditor/main/index.html?lang=fr&customer=ONLYOFFICE&frameEditorId=iframeEditor')
-        r = self.client.get(f"{host}/doc/{config['document']['key']}/c/info?t=1557393092054")
+            f'{host}/web-apps/apps/documenteditor/main/index.html?lang=fr&customer=ONLYOFFICE&frameEditorId=iframeEditor',
+            name=f'{host}/web-apps/apps/documenteditor/main'
+        )
+        r = self.client.get(
+            f"{host}/doc/{config['document']['key']}/c/info", params={'t': int(round(time.time() * 1000))},
+            name=f"{host}/doc/{{key}}/c/info"
+        )
         info = json.loads(r.text)
 
         # Some info on the OnlyOffice WebSocket protocol were grabbed from 
@@ -62,11 +90,15 @@ class OnlyofficeTaskSet(NextcloudBrowserTaskSet):
         ws_host = ws_host.replace('https://', 'wss://')
         ws_host = ws_host.replace('http://', 'ws://')
 
+        taskset = self
+
         class Scenario(OnlyofficeHandler):
             def scenario(self):
                 super().scenario()
+                taskset.wait()
                 super().send_message({'type': 'isSaveLock'}, wait_response='saveLock')
                 super().send_message(self.hello_world_message, wait_response='unSaveLock')
+                taskset.wait()
 
             @property
             def hello_world_message(self):
@@ -101,16 +133,22 @@ class OnlyofficeTaskSet(NextcloudBrowserTaskSet):
 
         Scenario().run(config, f"{ws_host}/doc/{propfind.fileid}/c/{server_id}/{session_id}/websocket")
 
-        webdav.delete(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}')
-        webdav.delete(f'/remote.php/dav/files/{self.browser.user}/Onlyoffice')
+        webdav.delete(
+            f'/remote.php/dav/files/{self.browser.user}/Onlyoffice/{filename}',
+            name='/remote.php/dav/files/{user}/Onlyoffice/{filename}'
+        )
+        webdav.delete(
+            f'/remote.php/dav/files/{self.browser.user}/Onlyoffice',
+            name='/remote.php/dav/files/{user}/Onlyoffice'
+        )
 
 
 class OnlyofficeLocust(HttpLocust):
     task_set = OnlyofficeTaskSet
     host = 'https://nextcloud.pce-cloud-2.asogfi.fr'
 
-    min_wait = 5000
-    max_wait = 10000
+    min_wait = 1000
+    max_wait = 5000
 
 
 if __name__ == '__main__':

@@ -24,16 +24,16 @@ class Browser:
         dom = BeautifulSoup(r.content, 'html.parser', from_encoding=r.encoding)
         return dom
 
-    def navigate(self, url, **kwargs):
+    def navigate(self, url, download=None, **kwargs):
         response = self.client.get(url, **kwargs)
-        return self.handle_response(response)
+        return self.handle_response(response, download=download, **kwargs)
 
-    def handle_response(self, response):
+    def handle_response(self, response, download=None, **kwargs):
         if response.status_code != 200:
             raise LocustError()
 
         dom = self.dom(response)
-        resources = self.resources.get(dom, self.options.download, response.request.url)
+        resources = self.resources.get(dom, download if download is not None else self.options.download, response.request.url)
         history_item = HistoryItem(resources, response, dom)
         if not self.options.history:
             self.history.clear()
@@ -56,12 +56,12 @@ class Browser:
     def last(self):
         return self.history[-1]
 
-    def follow(self, link_text: str, tag: Optional[Tag] = None):
+    def follow(self, link_text: str, tag: Optional[Tag] = None, download=None, **kwargs):
         if not tag:
             tag = self.last.dom
         for a in tag.select("a[href]"):
             if a.text == link_text:
-                return self.navigate(a.attrs['href'])
+                return self.navigate(a.attrs['href'], download=download, **kwargs)
         raise LocustError("Link not found (" + link_text + ")")
 
 
@@ -97,21 +97,21 @@ class Resources:
             pool = Pool(4)
             for url, response in resources.images.items():
                 if not response:
-                    pool.spawn(self.download_item, resources.images, url)
+                    pool.spawn(self.download_item, resources.images, url, name="{img resource}")
             for url, response in self.scripts.items():
                 if not response:
-                    pool.spawn(self.download_item, resources.scripts, url)
+                    pool.spawn(self.download_item, resources.scripts, url, name="{script resource}")
             for url, response in self.links.items():
                 if not response:
-                    pool.spawn(self.download_item, resources.links, url)
+                    pool.spawn(self.download_item, resources.links, url, name="{link resource}")
             pool.join()
 
         self.update(resources)
 
         return resources
 
-    def download_item(self, item, download_url):
-        item[download_url] = self.client.get(download_url)
+    def download_item(self, item, download_url, **kwargs):
+        item[download_url] = self.client.get(download_url, **kwargs)
 
     def update(self, resources):
         self.images.update(resources.images)
@@ -149,8 +149,8 @@ class Form:
             action = self.dom.attrs['action']
 
         if method == 'post':
-            return self.browser.handle_response(self.browser.client.post(action, values, **kwargs))
+            return self.browser.handle_response(self.browser.client.post(action, values, **kwargs), download=False)
         elif method == 'get':
-            return self.browser.handle_response(self.browser.client.get(action, **kwargs))  # TODO: Encode values in URL
+            return self.browser.handle_response(self.browser.client.get(action, **kwargs), download=False)  # TODO: Encode values in URL
         else:
             raise LocustError("Unsupported form method: " + method)

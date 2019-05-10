@@ -17,7 +17,7 @@ class OnlyofficeException(Exception):
 
 class HeaderAssertionError(AssertionError):
     def __init__(self, actual, expected, recv, *args, **kwargs):  # real signature unknown
-        super().__init__(f"recv header {actual} doesn't match expected header {expected}")
+        super().__init__(f"recv header {actual} doesn't match expected header {expected}. recv: {recv}")
         self.actual = actual
         self.expected = expected
         self.recv = recv
@@ -25,7 +25,8 @@ class HeaderAssertionError(AssertionError):
 
 class MessageTypeAssertionError(AssertionError):
     def __init__(self, actual, expected, payload, *args, **kwargs):  # real signature unknown
-        super().__init__(f"payload message type {actual} doesn't match expected message type {expected}")
+        super().__init__(
+            f"payload message type {actual} doesn't match expected message type {expected}. payload: {payload}")
         self.actual = actual
         self.expected = expected
         self.payload = payload
@@ -88,7 +89,7 @@ class OnlyofficeHandler:
         elif header == 'c':
             self._handle_close(payload)
         else:
-            raise NotImplemented(f"Message header {header} is not implemented.")
+            raise NotImplementedError(f"Message header {header} is not implemented.")
 
         return (header, *handled)
 
@@ -105,7 +106,7 @@ class OnlyofficeHandler:
             ret = getattr(self, message_type)(message)
             return message_type, message, ret
         else:
-            raise NotImplemented(f"Message type {message_type} is not implemented.")
+            raise NotImplementedError(f"Message type {message_type} is not implemented.")
 
     def _handle_heartbeat(self, message):
         self.state.heartbeats.append(message)
@@ -121,6 +122,8 @@ class OnlyofficeHandler:
         start_time = time.time()
         recv = None
         request_type = "WebSocket"
+        name = "OnlyOffice"
+        name_additions = "?"
         try:
             recv = self.ws.recv()
             handled = self._handle_recv(
@@ -129,11 +132,11 @@ class OnlyofficeHandler:
                 expected_message_type=wait_response if not isinstance(wait_response, bool) else None)
 
             if handled:
-                request_type += f" ({handled[0]})"
+                name_additions = handled[0]
             if len(handled) <= 1:
                 request_success.fire(
                     request_type=request_type,
-                    name=self.url,
+                    name=f"{name} ({name_additions})",
                     response_time=int((time.time() - start_time) * 1000),
                     response_length=len(recv)
                 )
@@ -141,12 +144,11 @@ class OnlyofficeHandler:
                 i = 1
                 while i < len(handled):
                     message_type, _, _ = handled[i]
-                    message_request_type = str(request_type)
-                    message_request_type += f" ({message_type})"
+                    name_additions += f" ({message_type})"
 
                     request_success.fire(
-                        request_type=message_request_type,
-                        name=self.url,
+                        request_type=request_type,
+                        name=f"{name} ({name_additions})",
                         response_time=int((time.time() - start_time) * 1000),
                         response_length=len(recv)
                     )
@@ -156,7 +158,7 @@ class OnlyofficeHandler:
             if e.actual == 'h':
                 request_success.fire(
                     request_type=request_type,
-                    name=self.url,
+                    name=f"{name} ({name_additions})",
                     response_time=int((time.time() - start_time) * 1000),
                     response_length=len(recv) if recv else None
                 )
@@ -164,7 +166,7 @@ class OnlyofficeHandler:
             else:
                 request_failure.fire(
                     request_type=request_type,
-                    name=self.url,
+                    name=f"{name} ({name_additions})",
                     response_time=int((time.time() - start_time) * 1000),
                     exception=e
                 )
@@ -182,6 +184,7 @@ class OnlyofficeHandler:
     def auth(self, message):
         if message.get('result') != 1:
             raise OnlyofficeException(f"Invalid auth response: {message}")
+        print(message)
         self.state.auth = message
 
     def license(self, message):

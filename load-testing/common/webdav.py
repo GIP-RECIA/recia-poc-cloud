@@ -29,7 +29,7 @@ class Webdav:
         self.client = client
         self.requesttoken = requesttoken
 
-    def propfind(self, url, deep=False) -> Iterator[PropfindResponse]:
+    def propfind(self, url, deep=False, **kwargs) -> Iterator[PropfindResponse]:
         query = """<?xml version="1.0"?>
 <d:propfind xmlns:d="DAV:" xmlns:oc="http://owncloud.org/ns" xmlns:nc="http://nextcloud.org/ns" xmlns:ocs="http://open-collaboration-services.org/ns">
   <d:prop>
@@ -53,8 +53,12 @@ class Webdav:
     <oc:share-types />
   </d:prop>
 </d:propfind>"""
-        r = self.client.request('PROPFIND', url, data=query, headers={"Content-Type": "application/xml; charset=UTF8",
-                                                                      "requesttoken": self.requesttoken})
+        r = self.client.request('PROPFIND',
+                                url,
+                                data=query,
+                                headers={"Content-Type": "application/xml; charset=UTF8",
+                                         "requesttoken": self.requesttoken},
+                                **kwargs)
 
         if r.status_code == 207:
             response_items = BeautifulSoup(r.text, 'html.parser').findAll('d:response')
@@ -62,7 +66,7 @@ class Webdav:
                 response = PropfindResponse(response_item)
                 yield response
                 if deep and response.collection:
-                    yield from self.propfind(response.href)
+                    yield from self.propfind(response.href, name=f"{kwargs.get('name', url)} (deep)")
         else:
             raise WebdavError(f"Invalid response status code: {r.status_code}. {r.text}", r=r)
 
