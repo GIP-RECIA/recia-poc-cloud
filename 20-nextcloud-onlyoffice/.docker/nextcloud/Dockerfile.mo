@@ -1,4 +1,4 @@
-FROM nextcloud:15.0.6-apache
+FROM nextcloud:15.0.6-fpm
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 
 {{#DOCKER_DEVBOX_CA_CERTIFICATES}}
@@ -35,4 +35,5 @@ RUN chown -R www-data:root /var/www/html
 ADD nextcloud/custom-entrypoint.sh /custom-entrypoint.sh
 RUN chmod +x /custom-entrypoint.sh
 ENTRYPOINT ["/custom-entrypoint.sh"]
-CMD ["apache2-foreground"]
+#CMD ["apache2-foreground"]
+CMD ["php-fpm"]

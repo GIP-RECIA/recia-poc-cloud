@@ -4,6 +4,8 @@ services:
     environment:
       - 'XDEBUG_CONFIG=idekey=reciacloud remote_host=${HOST_IP}'
       - 'PHP_IDE_CONFIG=serverName=reciacloud'
+  nextcloud-web:
+    environment:
       - 'VIRTUAL_HOST=nextcloud.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
     networks:
       - default

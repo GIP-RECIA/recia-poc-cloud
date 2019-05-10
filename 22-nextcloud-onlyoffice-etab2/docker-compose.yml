@@ -10,6 +10,17 @@ services:
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
       - 'nextcloud-data:/var/www/html/data'
+  nextcloud-web:
+    build:
+      context: .docker
+      dockerfile: nextcloud-web/Dockerfile
+    volumes:
+      - '${COMPOSE_PROJECT_DIR}/nextcloud:/var/www/html'
+      - '${COMPOSE_PROJECT_DIR}/config:/config'
+      - '${COMPOSE_PROJECT_DIR}/patches:/patches'
+      - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
+      - 'nextcloud-data:/var/www/html/data'
+      - '${COMPOSE_PROJECT_DIR}/.docker/nextcloud-web/nginx.conf:/etc/nginx/nginx.conf'
   nextcloud-db:
     image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud-db'
     init: true

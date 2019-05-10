@@ -5,6 +5,7 @@
 /.bin/jq
 
 /.docker/*/Dockerfile
+/.docker/nextcloud-web/nginx.conf
 
 /nextcloud
 /config/system.config.json
