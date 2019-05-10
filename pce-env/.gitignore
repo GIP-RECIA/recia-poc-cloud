@@ -1,9 +1,12 @@
 /docker-compose.override.yml
 /.docker/.ca-certificates
-/.docker/*/Dockerfile
+/.nginx-proxy/certs
 /.init/
 /.bash_enter.env
 /.bin/jq
+
+/.docker/*/Dockerfile
+
 /cas-saml/metadata-backups
 /cas-saml/idp-metadata.xml
 /cas-services/nextcloud*.json
