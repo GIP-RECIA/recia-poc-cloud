@@ -4,11 +4,11 @@ networks:
     external: true
     name: pce-env
 services:
-  nextcloud:
+  nextcloud-php:
     build:
       context: .docker
-      dockerfile: nextcloud/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud'
+      dockerfile: nextcloud-php/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud-php'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     networks:
@@ -20,17 +20,20 @@ services:
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
       - 'nextcloud-data:/var/www/html/data'
-  nextcloud-web:
+  nextcloud:
     build:
       context: .docker
-      dockerfile: nextcloud-web/Dockerfile
+      dockerfile: nextcloud/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud'
+    init: true
+    restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     volumes:
       - '${COMPOSE_PROJECT_DIR}/nextcloud:/var/www/html'
       - '${COMPOSE_PROJECT_DIR}/config:/config'
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
       - 'nextcloud-data:/var/www/html/data'
-      - '${COMPOSE_PROJECT_DIR}/.docker/nextcloud-web/nginx.conf:/etc/nginx/nginx.conf'
+      - '${COMPOSE_PROJECT_DIR}/.docker/nextcloud/nginx.conf:/etc/nginx/nginx.conf'
   nextcloud-db:
     build:
       context: .docker

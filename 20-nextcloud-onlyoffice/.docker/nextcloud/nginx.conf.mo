@@ -35,7 +35,7 @@ http {
     #gzip  on;
 
     upstream php-handler {
-        server nextcloud.{{COMPOSE_NETWORK_NAME}}:9000;
+        server nextcloud-php.{{COMPOSE_NETWORK_NAME}}:9000;
     }
 
     server {

@@ -30,7 +30,7 @@ occ config:import /config/system.config.json
 - Importer les certificates spécifiques
 
 ```
-dc exec nextcloud occ-import-system-certs
+dc exec nextcloud-php occ-import-system-certs
 ```
 
 - Installer/Activer les plugins
@@ -46,7 +46,7 @@ occ app:enable files_external
 - Appliquer les patchs
 
 ```
-dc exec nextcloud apply-nextcloud-patches
+dc exec nextcloud-php apply-nextcloud-patches
 ```
 
 - Charger la configuration des plugins
