@@ -32,6 +32,7 @@ services:
       - '${COMPOSE_PROJECT_DIR}/cas-services:/etc/cas/services'
       - '${COMPOSE_PROJECT_DIR}/cas-keystore/thekeystore:/etc/cas/thekeystore'
       - '${COMPOSE_PROJECT_DIR}/cas-saml:/etc/cas/saml'
+      - '${COMPOSE_PROJECT_DIR}/cas/config/cas.properties:/etc/cas/cas.properties'
 volumes:
   ldap-data: null
   ldap-config: null

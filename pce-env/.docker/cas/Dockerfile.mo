@@ -22,7 +22,6 @@ COPY cas/gradle /cas-overlay/gradle
 RUN ./gradlew clean build
 
 COPY cas/config/* /cas-overlay/etc/cas/config/
-
 RUN ./gradlew copyCasConfiguration
 
 EXPOSE 8080 8443
