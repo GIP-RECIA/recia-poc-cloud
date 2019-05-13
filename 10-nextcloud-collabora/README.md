@@ -94,19 +94,8 @@ dc exec nextcloud apply-nextcloud-patches
 occ maintenance:update:htaccess
 ```
 
-- [NextCloud PHP Version 7.3 Breaks SAML plugin](https://github.com/nextcloud/user_saml/issues/325)
-
-(Voir également [nextcloud/user_saml#324](https://github.com/nextcloud/user_saml/issues/324))
-
-Ce problème ne se produit qu'après le passage en version PHP 7.3 de l'image docker officielle, intervenu le 10 Avril 2019.
-
-Trois options sont possibles pour le contourner.
-
-  - Utiliser une image Docker spécifique embarquant PHP 7.2
-  - Utiliser une version d'image inférieure à 15.0.7 (L'applicatif peut néanmoins être mise à jour via `occ upgrade`)
-
-Configuration manuelles
-=======================
+Configuration manuelle
+======================
 
 Les procédures suivantes correspondent à la configuration manuelle des plugins, qui sont intégrés dans les fichiers
 `config/*.config.json`.

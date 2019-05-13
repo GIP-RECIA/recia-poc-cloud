@@ -1,4 +1,4 @@
-FROM nextcloud:15.0.6-fpm
+FROM nextcloud:15-fpm
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 
 {{#DOCKER_DEVBOX_CA_CERTIFICATES}}
