@@ -102,8 +102,6 @@ Ce problème ne se produit qu'après le passage en version PHP 7.3 de l'image do
 
 Trois options sont possibles pour le contourner.
 
-  - Désactiver la signature des réponses SAML dans les services SAML CAS associés à NextCloud 
-  (`"signResponses": false`) et autoriser les réponses non signées dans la configuration du plugin.
   - Utiliser une image Docker spécifique embarquant PHP 7.2
   - Utiliser une version d'image inférieure à 15.0.7 (L'applicatif peut néanmoins être mise à jour via `occ upgrade`)
 
