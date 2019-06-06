@@ -1,3 +1,6 @@
+# Nginx Nextcloud FPM configuration
+# https://github.com/nextcloud/docker/blob/master/.examples/docker-compose/with-nginx-proxy/postgres/fpm/web/nginx.conf
+
 worker_processes  1;
 
 error_log  /var/log/nginx/error.log warn;

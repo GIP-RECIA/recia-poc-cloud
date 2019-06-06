@@ -2,5 +2,5 @@
 
 for cert in /usr/local/share/ca-certificates/*; do
  echo "Importing certificate $cert ..."
- sudo -u www-data php occ security:certificates:import $cert
+ php occ security:certificates:import $cert
 done

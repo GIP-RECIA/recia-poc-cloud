@@ -2,5 +2,5 @@
 
 for patch in /patches/*; do
  echo "Applying patch $patch ..."
- sudo -u www-data patch -p1 < "$patch"
+ patch -p1 < "$patch"
 done

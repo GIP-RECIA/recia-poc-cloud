@@ -8,7 +8,8 @@ services:
     build:
       context: .docker
       dockerfile: nextcloud-php/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud-php'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/nextcloud-php'
+    user: '${USER_ID}:${GROUP_ID}'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     networks:
@@ -19,12 +20,12 @@ services:
       - '${COMPOSE_PROJECT_DIR}/config:/config'
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
-      - 'nextcloud-data:/var/www/html/data'
   nextcloud:
     build:
       context: .docker
       dockerfile: nextcloud/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/nextcloud'
+    user: '${USER_ID}:${GROUP_ID}'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     volumes:
@@ -32,13 +33,13 @@ services:
       - '${COMPOSE_PROJECT_DIR}/config:/config'
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
-      - 'nextcloud-data:/var/www/html/data'
       - '${COMPOSE_PROJECT_DIR}/.docker/nextcloud/nginx.conf:/etc/nginx/nginx.conf'
   nextcloud-db:
     build:
       context: .docker
       dockerfile: nextcloud-db/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/nextcloud-db'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/nextcloud-db'
+    user: '${USER_ID}:${GROUP_ID}'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     environment:
@@ -52,12 +53,11 @@ services:
     build:
       context: .docker
       dockerfile: onlyoffice/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/onlyoffice'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/onlyoffice'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
   clamav:
     image: mk0x/docker-clamav:alpine
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
 volumes:
-  nextcloud-data:
   nextcloud-db:

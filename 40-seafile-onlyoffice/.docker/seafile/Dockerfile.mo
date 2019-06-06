@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 ENV LANG=C.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
 
-{{#DOCKER_DEVBOX_CA_CERTIFICATES}}
+{{#DOCKER_DEVBOX_COPY_CA_CERTIFICATES}}
 COPY .ca-certificates/* /usr/local/share/ca-certificates/
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/* \
 && update-ca-certificates
@@ -12,7 +12,7 @@ ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt \
     SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-{{/DOCKER_DEVBOX_CA_CERTIFICATES}}
+{{/DOCKER_DEVBOX_COPY_CA_CERTIFICATES}}
 
 RUN \
     apt-get update && \
@@ -60,6 +60,26 @@ RUN sed -i -r "s/seafile_config\.validate_seafile_dir\(seafile_dir\)/seafile_dir
 sed -i -r "s/Utils\.error\('Ccnet config dir.*/pass/" ${SEAFILE_PATH}/setup-seafile-mysql.py &&\
 sed -i -r "s/self\.ccnet_dir = os.path.join\(env_mgr\.top_dir, 'ccnet'\)/self.ccnet_dir = os.path.join(env_mgr.top_dir, 'ccnet.tmp')/" ${SEAFILE_PATH}/setup-seafile-mysql.py
 
+RUN apt-get update -y && apt-get install -y libcap2-bin && rm -rf /var/lib/apt/lists/* \
+&& setcap 'cap_net_bind_service=+ep' $(which nginx)
+
+RUN chown -R www-data:www-data /seafile
+RUN chown -R www-data:www-data /run
+RUN chown www-data:www-data /opt/seafile
+RUN chown -R www-data:www-data /opt/seafile/latest/runtime
+RUN chown -R www-data:www-data /etc/nginx
+RUN chown -R www-data:www-data /scripts
+RUN chown -R www-data:www-data /var/log/nginx/
+RUN chown -R www-data:www-data /var/lib/nginx/
+
+# fixuid
+ADD fixuid.tar.gz /usr/local/bin
+RUN chown root:root /usr/local/bin/fixuid && \
+    chmod 4755 /usr/local/bin/fixuid && \
+    mkdir -p /etc/fixuid
+COPY seafile/fixuid.yml /etc/fixuid/config.yml
+
+USER www-data
 
 WORKDIR "/seafile"
 VOLUME "/seafile/ccnet" "/seafile/seafile-data" "/seafile/seahub-data" "/seafile/conf"
@@ -67,3 +87,4 @@ VOLUME "/seafile/ccnet" "/seafile/seafile-data" "/seafile/seahub-data" "/seafile
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+

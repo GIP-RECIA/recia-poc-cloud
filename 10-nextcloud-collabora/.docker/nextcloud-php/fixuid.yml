@@ -1,0 +1,9 @@
+user: www-data
+group: www-data
+paths:
+  - /
+  - /config
+  - /patches
+  - /var/www/html
+  - /var/www/html/custom_apps
+  - /var/www/html/custom_apps/reciacustom

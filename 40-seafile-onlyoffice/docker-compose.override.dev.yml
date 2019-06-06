@@ -3,21 +3,31 @@ services:
   seafile:
     environment:
       - 'VIRTUAL_HOST=seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
-    ports:
-      - '${DOCKER_DEVBOX_PORT_PREFIX}80:8000'
-      - '${DOCKER_DEVBOX_PORT_PREFIX}82:8082'
+      - 'VIRTUAL_PORT=80'
+    labels:
+      - traefik.enable=true
+      - 'traefik.frontend.rule=Host:seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - traefik.port=80
+      - traefik.frontend.redirect.entryPoint=https
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
   seafile-db:
     ports:
       - '${DOCKER_DEVBOX_PORT_PREFIX}06:3306'
   onlyoffice:
     environment:
       - 'VIRTUAL_HOST=onlyoffice.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - 'VIRTUAL_PORT=80'
+    labels:
+      - traefik.enable=true
+      - 'traefik.frontend.rule=Host:onlyoffice.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - traefik.port=80
+      - traefik.frontend.redirect.entryPoint=https
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
 networks:
-  nginx-proxy:
+  reverse-proxy:
+    name: '${DOCKER_DEVBOX_REVERSE_PROXY_NETWORK}'
     external: true

@@ -1,10 +1,10 @@
-FROM nextcloud:15-fpm
+FROM nextcloud:15.0.8-fpm
 LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
+{{#DOCKER_DEVBOX_COPY_CA_CERTIFICATES}}
 
-{{#DOCKER_DEVBOX_CA_CERTIFICATES}}
 COPY .ca-certificates/* /usr/local/share/ca-certificates/
 RUN update-ca-certificates
-{{/DOCKER_DEVBOX_CA_CERTIFICATES}}
+{{/DOCKER_DEVBOX_COPY_CA_CERTIFICATES}}
 
 # occ commands should be performed with "sudo -u www-data"
 RUN apt-get update && apt-get install sudo && rm -rf /var/lib/apt/lists/*
@@ -21,19 +21,15 @@ RUN chmod +x /usr/local/bin/occ-import-system-certs
 ADD nextcloud-php/apply-nextcloud-patches /usr/local/bin/apply-nextcloud-patches
 RUN chmod +x /usr/local/bin/apply-nextcloud-patches
 
-# Fix permissions to match host user
-RUN usermod -u ${HOST_UID:-1000} www-data && groupmod -g ${HOST_GID:-1000} www-data
-RUN mkdir -p /var/cache/apache2 && chown -R www-data:www-data /var/cache/apache2
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
+RUN mkdir -p /config && chown -R www-data:www-data /config
+RUN mkdir -p /patches && chown -R www-data:www-data /patches
 
-# Write permission issue workaround
-RUN mkdir /var/www/html/config
-RUN mkdir /var/www/html/custom_apps
-RUN mkdir /var/www/html/data
-RUN mkdir /var/www/html/themes
-RUN chown -R www-data:root /var/www/html
+# fixuid
+ADD fixuid.tar.gz /usr/local/bin
+RUN chown root:root /usr/local/bin/fixuid && \
+    chmod 4755 /usr/local/bin/fixuid && \
+    mkdir -p /etc/fixuid
+COPY nextcloud-php/fixuid.yml /etc/fixuid/config.yml
 
-ADD nextcloud-php/custom-entrypoint.sh /custom-entrypoint.sh
-RUN chmod +x /custom-entrypoint.sh
-ENTRYPOINT ["/custom-entrypoint.sh"]
-#CMD ["apache2-foreground"]
-CMD ["php-fpm"]
+USER www-data:www-data

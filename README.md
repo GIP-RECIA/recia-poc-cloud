@@ -1,10 +1,16 @@
 POC Cloud
 =========
 
+Prérequis
+---------
+
 Quick Start
 -----------
 
-Le repository utilise les submodules git pour les plugins NextCloud
+- Les environnements nécessitent l'installation globale de 
+[docker-devbox](https://github.com/gfi-centre-ouest/docker-devbox) sur la machine. 
+
+- Le repository utilise les submodules git pour les plugins NextCloud
 
 ```
 git clone https://https://github.com/GIP-RECIA/recia-poc-cloud/

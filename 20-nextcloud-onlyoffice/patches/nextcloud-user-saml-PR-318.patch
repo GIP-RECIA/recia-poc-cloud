@@ -1,4 +1,4 @@
-From a4c5baefd0b885dbc83f2937d99d611a7217b240 Mon Sep 17 00:00:00 2001
+From 17a24e59388ca7180b58ffaf9191a1184e1062bb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Alvergnat?= <remi.alvergnat@gfi.fr>
 Date: Fri, 5 Apr 2019 10:41:19 +0200
 Subject: [PATCH] Support reverse proxy the NextCloud way
@@ -18,18 +18,18 @@ Signed-off-by: Rémi Alvergnat <remi.alvergnat@gfi.fr>
  1 file changed, 6 insertions(+)
 
 diff --git a/lib/SAMLSettings.php b/lib/SAMLSettings.php
-index 39fd1019..6ba6e9f6 100644
+index 0cde99a6..6b119ca7 100644
 --- a/custom_apps/user_saml/lib/SAMLSettings.php
 +++ b/custom_apps/user_saml/lib/SAMLSettings.php
-@@ -26,6 +26,7 @@
- use OCP\IRequest;
+@@ -27,6 +27,7 @@
  use OCP\ISession;
  use OCP\IURLGenerator;
+ use OneLogin\Saml2\Constants;
 +use OneLogin\Saml2\Utils;
- 
+
  class SAMLSettings {
  	/** @var IURLGenerator */
-@@ -53,6 +54,11 @@ public function __construct(IURLGenerator $urlGenerator,
+@@ -54,6 +55,11 @@ public function __construct(IURLGenerator $urlGenerator,
  		$this->config = $config;
  		$this->request = $request;
  		$this->session = $session;
@@ -39,5 +39,5 @@ index 39fd1019..6ba6e9f6 100644
 +		Utils::setSelfPort(null);
 +		Utils::setProxyVars(true);
  	}
- 
+
  	/**

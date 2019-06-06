@@ -10,12 +10,12 @@ Installation
 dc up -d
 ```
 
-*Si le fichier `volumes/seafile-conf/seahub_settings.py` n'existe pas, la procédure 
+*Si le fichier `seafile/conf/seahub_settings.py` n'existe pas, la procédure 
 d'installation de seafile est automatiquement déclenchée.*
 
 - Se connecter à [https://seafile.pce-cloud-4.test](https://seafile.pce-cloud-4.test) avec le compte `admin@example.com`/`admin`.
 
-- Activer OnlyOffice en ajoutant la configuration suivante au fichier `volumes/seafile-conf/seahub_settings.py`
+- Activer OnlyOffice en ajoutant la configuration suivante au fichier `seafile/conf/seahub_settings.py`
 
 ```python
 # Enable Only Office
@@ -39,7 +39,7 @@ LDAP
 
 Pour la configuration LDAP, suivre la [documentation officielle](https://manual.seafile.com/deploy/using_ldap.html).
 
-- Ajouter dans le fichier `volumes/seafile-conf/ccnet.conf` la configuration LDAP
+- Ajouter dans le fichier `seafile/conf/ccnet.conf` la configuration LDAP
 
 ```
 [LDAP]

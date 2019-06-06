@@ -1,9 +1,12 @@
 /docker-compose.override.yml
+/.docker-compose.resolved.yml
+/.docker-compose.*.resolved.yml
 /.docker/.ca-certificates
-/.nginx-proxy/certs
+/.docker-compose.env
+/.docker/*/Dockerfile
+/.docker/fixuid.tar.gz
 /.init/
 /.bash_enter.env
-/.bin/jq
-
-/.docker/*/Dockerfile
-/volumes/seafile-conf
+/.traefik/*.ssl.toml
+/.certs
+/seafile

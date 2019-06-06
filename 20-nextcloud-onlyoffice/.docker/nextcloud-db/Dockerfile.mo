@@ -5,5 +5,11 @@ LABEL maintainer="Rémi Alvergnat <remi.alvergnat@gfi.fr>"
 RUN mkdir /workdir
 VOLUME /workdir
 
-# Fix permissions to match host user
-RUN usermod -u ${HOST_UID:-1000} postgres && groupmod -g ${HOST_GID:-1000} postgres
+# fixuid
+ADD fixuid.tar.gz /usr/local/bin
+RUN chown root:root /usr/local/bin/fixuid && \
+    chmod 4755 /usr/local/bin/fixuid && \
+    mkdir -p /etc/fixuid
+COPY nextcloud-db/fixuid.yml /etc/fixuid/config.yml
+
+USER postgres

@@ -1,0 +1,10 @@
+user: www-data
+group: www-data
+paths:
+  - /
+  - /var/cache/nginx
+  - /var/run/nginx.pid
+  - /var/www/html
+  - /var/www/html/custom_apps
+  - /var/www/html/custom_apps/reciacustom
+

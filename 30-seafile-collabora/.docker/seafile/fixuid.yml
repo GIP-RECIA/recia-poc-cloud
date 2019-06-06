@@ -1,0 +1,9 @@
+user: www-data
+group: www-data
+paths:
+  - /
+  - /seafile
+  - /seafile/ccnet
+  - /seafile/seafile-data
+  - /seafile/seahub-data
+  - /seafile/conf

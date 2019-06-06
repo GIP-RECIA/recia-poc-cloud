@@ -13,10 +13,16 @@ services:
     #command: "./gradlew remoteDebug" # Use remote debug task to enable CAS remote debug on tcp/5005
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
     environment:
       - 'VIRTUAL_HOST=cas.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
       - 'VIRTUAL_PORT=8080'
+    labels:
+      - traefik.enable=true
+      - 'traefik.frontend.rule=Host:cas.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
+      - traefik.port=8080
+      - traefik.frontend.redirect.entryPoint=https
 networks:
-  nginx-proxy:
+  reverse-proxy:
+    name: '${DOCKER_DEVBOX_REVERSE_PROXY_NETWORK}'
     external: true

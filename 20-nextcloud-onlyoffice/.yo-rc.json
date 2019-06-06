@@ -1,7 +1,7 @@
 {
   "@gfi-centre-ouest/generator-docker-devbox": {
     "promptValues": {
-      "projectName": "reciacloud",
+      "projectName": "pce_cloud_2",
       "authorName": "Rémi Alvergnat",
       "authorEmail": "remi.alvergnat@gfi.fr",
       "features~0": [
@@ -9,12 +9,13 @@
         "postgresql"
       ],
       "features~0~more": false,
-      "portPrefix": 607,
+      "portPrefix": 608,
       "features~0~php-apache~phpVersion": "7.2",
       "features~0~php-apache~phpExtensions": [],
       "features~0~php-apache~phpTools": [],
       "features~0~php-apache~apacheExtensions": [],
-      "features~0~postgresql~postgresVersion": "11.1"
+      "features~0~postgresql~postgresVersion": "11.1",
+      "features~1~php-apache~nativeClientPostgreSQL": null
     }
   }
 }

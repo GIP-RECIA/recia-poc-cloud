@@ -8,7 +8,7 @@ services:
     build:
       context: .docker
       dockerfile: ldap/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}pce-env/ldap'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/ldap'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     environment:
@@ -23,7 +23,7 @@ services:
     build:
       context: .docker
       dockerfile: cas/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}pce-env/cas'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/cas'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     depends_on:

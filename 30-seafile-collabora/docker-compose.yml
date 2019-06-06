@@ -8,7 +8,8 @@ services:
     build:
       context: .docker
       dockerfile: seafile/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/seafile'
+    user: '${USER_ID}:${GROUP_ID}'
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     networks:
       - default
@@ -17,7 +18,7 @@ services:
       - 'seafile-ccnet:/seafile/ccnet'
       - 'seafile-seafile-data:/seafile/seafile-data'
       - 'seafile-seahub-data:/seafile/seahub-data'
-      - '${COMPOSE_PROJECT_DIR}/volumes/seafile-conf:/seafile/conf'
+      - '${COMPOSE_PROJECT_DIR}/seafile/conf:/seafile/conf'
     environment:
       - 'SEAFILE_URL=https://seafile.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
       - 'MYSQL_HOST=seafile-db.${COMPOSE_NETWORK_NAME}'
@@ -30,7 +31,7 @@ services:
     build:
       context: .docker
       dockerfile: seafile-db/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/seafile-db'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/seafile-db'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     environment:
@@ -42,7 +43,7 @@ services:
     build:
       context: .docker
       dockerfile: collabora/Dockerfile
-    image: '${DOCKER_DEVBOX_REGISTRY}reciacloud/collabora'
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/collabora'
     init: true
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     cap_add:
