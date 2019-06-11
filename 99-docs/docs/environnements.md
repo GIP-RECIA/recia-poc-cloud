@@ -2,57 +2,24 @@
 
 ## Prérequis
 
-### docker + docker-compose
+### docker-devbox
 
-Les environnements docker nécessitent [docker](https://www.docker.com) et 
-[docker-compose](https://docs.docker.com/compose/) pour s'éxecuter et doivent donc être installés au préalable.
-
-### bash
-
-Chaque environnement s'appuie sur un même squelette composé de scripts bash. Ces scripts bash apportent des 
-facilités dans l'utilisation et le déploiement des environnements docker.
+Les environnements docker nécessitent un environnement 
+[docker-devbox](https://github.com/gfi-centre-ouest/docker-devbox) pour s'éxecuter. 
 
 !!! note "GFI contribue à l'OpenSource"
-    Ces squelettes ont été générés par 
+    docker-devbox est un composant opensource développé par GFI Informatique qui permet d'industrialiser les 
+    environnements applicatifs avec Docker de docker-compose.
     [generator-docker-devbox](https://github.com/gfi-centre-ouest/generator-docker-devbox), un générateur yeoman 
     opensource créé et maintenu par GFI.
+    
+[docker-devbox](https://github.com/gfi-centre-ouest/docker-devbox) s'appuie sur les technologies suivantes:
 
-### nginx-proxy
-
-Pour fonctionner, le squelette généré nécessite l'installation du container 
-[nginx-proxy](https://github.com/jwilder/nginx-proxy) qui permet d'automatiser la configuration d'un reverse proxy 
-frontal en fonction des containers de chaque environnement. 
-
-Ce proxy permet d'accéder à différentes applications via HTTP/HTTPS, en discriminant par le nom de domaine (VirtualHost).
-
-Voici le script bash qui permet d'automatiser l'installation de nginx-proxy.
-
-```bash
-NGINX_PROXY_HOME="${HOME}/.nginx-proxy"
-
-mkdir -p "${NGINX_PROXY_HOME}/vhost.d"
-mkdir -p "${NGINX_PROXY_HOME}/certs"
-mkdir -p "${NGINX_PROXY_HOME}/dhparam"
-
-docker network create nginx-proxy
-
-docker run -d -p 80:80 -p 443:443 \
-  --restart unless-stopped --net nginx-proxy --name nginx-proxy \
-  -v "${NGINX_PROXY_HOME}/certs:/etc/nginx/certs" \
-  -v "${NGINX_PROXY_HOME}/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro" \
-  -v "${NGINX_PROXY_HOME}/vhost.d:/etc/nginx/vhost.d:ro" \
-  -v "${NGINX_PROXY_HOME}/dhparam:/etc/nginx/dhparam" \
-  -v /var/run/docker.sock:/tmp/docker.sock:ro \
-  jwilder/nginx-proxy
-```
-
-### SmartCD
-
-Il est également conseillé d'installer [SmartCD](https://github.com/cxreg/smartcd) pour automatiser l'initialisation de
-chaque environnement lors du `cd` dans le dossier. 
-
-SmartCD  n'est pas obligatoire, mais en son absence, il faut sourcer `.bash_enter` manuellement pour activer un environnement, et sourcer 
-`.bash_leave` pour le désactiver.
+- Docker
+- Docker-Compose
+- Traefik
+- SmartCD
+- bash
 
 ## Environnements de démonstration
 

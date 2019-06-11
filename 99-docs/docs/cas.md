@@ -6,7 +6,7 @@ NextCloud
 
 NextCloud propose une application (CAS user an group backend) pour intégrer le SSO fourni par CAS.
 
-Cependant, il n'est plus possible d'utilisation à la fois l'authentification CAS et le plugin LDAP pour gérer les
+Cependant, il n'est plus possible d'utiliser à la fois l'authentification CAS et le plugin LDAP pour gérer les
 connexions d'un même pool d'utilisateur. Il faut donc faire un choix entre les fonctionnalités apportées par le plugin 
 LDAP et par le plugin CAS, ce qui pose problème.
 
@@ -14,6 +14,33 @@ Il existe également une application officielle et plus générique (SSO & SAML 
 l'avantage d'être compatible avec le plugin LDAP, et peut se paramétrer pour authentifier l'utilisateur via un Header 
 HTTP ajouté par exemple via le module Apache [mod_auth_cas](https://github.com/apereo/mod_auth_cas). Il semble donc
 préférable d'utilise ce plugin pour implémenter le SSO, plutôt que le plugin dédié pour CAS.
+
+Après avoir réalisé de nombreux tests, l'authentification SAML est la seule option viable pour que l'ensemble 
+fonctionne comme attendu. Les environnements docker nextcloud sont paramétrés pour utiliser ce protocole et prouvent 
+le fonctionnement du SSO avec CAS.
+
+Le Single Sign Out a été testé et fonctionne comme attendu en SAML. Il est important de configurer la propriété 
+`metadataLocation` pour que le SLS (Single Logout Service) de Nextcloud soit enregistré auprès de CAS.
+
+```
+{
+  "@class": "org.apereo.cas.support.saml.services.SamlRegisteredService",
+  "serviceId": "https?://nextcloud\\.pce-cloud-2\\.test/apps/user_saml/saml/metadata",
+  "name": "NextCloud 2",
+  "metadataLocation" : "https://nextcloud.pce-cloud-2.test/apps/user_saml/saml/metadata",
+  "id": 10000002,
+  "usernameAttributeProvider": {
+    "@class": "org.apereo.cas.services.PrincipalAttributeRegisteredServiceUsernameProvider",
+    "usernameAttribute": "uid"
+  },
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}
+```
+
+Ainsi, lorsque l'utilisateur se déconnecte du CAS, sa session Nextcloud est invalidée, et le lien "Se déconnecter" de
+Nextcloud pointe vers l'url de logout du CAS.
 
 Seafile
 -------

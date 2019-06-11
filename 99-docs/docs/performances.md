@@ -44,4 +44,14 @@ Collabora il peut en accueillir dix seulement.
 
 ### Tests de performance
 
-***TODO***
+Des tests ont été écrits en python avec [locust](https://docs.locust.io), un outils de test de montée en charge facile
+d'accès et distribué.
+
+Les sources sont disponibles dans le dossier [load-testing](https://github.com/GIP-RECIA/recia-poc-cloud/tree/master/load-testing).
+
+Un test a été déroulé sur l'environnement de démonstration `pce-cloud-2`, intégrant Nextcloud et 
+OnlyOffice. Ce test de montée en charge à permis de montrer que le service OnlyOffice bloque lorsque plus de 20 
+utilisateurs l'utilisent en même temps (limite annoncée de la license OpenSource). Cela a également mis en évidence
+une certaine lenteur de Nextcloud lors de la manipulation des fichiers via Webdav. 
+ 
+La mise en oeuvre d'un load balancer permettre de mitiger ces problèmes.
