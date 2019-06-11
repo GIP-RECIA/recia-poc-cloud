@@ -12,7 +12,8 @@ services:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:nextcloud.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
       - traefik.port=80
-      - traefik.frontend.redirect.entryPoint=https
+      - traefik.frontend.redirect.regexp=https://(.*):?.*
+      - traefik.frontend.redirect.replacement=https://$$1
     networks:
       - default
       - reverse-proxy
@@ -27,7 +28,8 @@ services:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:onlyoffice.${DOCKER_DEVBOX_DOMAIN_PREFIX}.${DOCKER_DEVBOX_DOMAIN}'
       - traefik.port=80
-      - traefik.frontend.redirect.entryPoint=https
+      - traefik.frontend.redirect.regexp=https://(.*):?.*
+      - traefik.frontend.redirect.replacement=https://$$1
     networks:
       - default
       - reverse-proxy
