@@ -17,6 +17,9 @@ NextCloud implémente une véritable fonctionnalité de thème, qui intègre la 
 
 Il est donc possible dans NextCloud de modifier n'importe quelle partie de l'application via le thème.
 
+Cette fonctionnalité de thème avancé nécessite la désactivation de l'application `theming` qui permet une légère 
+personnalisation via des paramétrages dans l'IHM.
+
 Voir [Theming Nextcloud](https://docs.nextcloud.com/server/stable/developer_manual/core/theming.html)
 
 ### Seafile
@@ -36,58 +39,50 @@ Voir [Seahub customization](https://manual.Seafile.com/config/seahub_customizati
 
 Sur ce point, aucune solution ne couvre directement le besoin.
 
-Il est possible de le gérer au niveau du serveur web frontal, en utilisant un module de ré-écriture d'URL 
-(comme `mod_rewrite` sur Apache) et en utilisant des variantes par VirtualHost. La configuration de ré-écriture
-pourra varier en fonction du VirtualHost, permettant de faire pointer le thème par défaut vers des dossiers de thèmes 
-différents.
+Pour Nextcloud, il n'est possible de le gérer l'activation d'un thème spécifique par VirtualHost, car le thème 
+NextCloud effectif est construit par PHP qui accède directement aux fichiers sources du thème.
 
-
-```
-<VirtualHost *:80>
-    ServerName 1d.recia.com
-
-    # Nextcloud configuration
-    Include nextcloud.common.conf
-
-    # Rewrite theme to a custom one
-    RewriteRule ^theme/example/(.*) /theme/1d/$1 [L]
-</VirtualHost>
-
-<VirtualHost *:80>
-    ServerName 2d.recia.com
-
-    # Nextcloud configuration
-    Include nextcloud.common.conf
-
-    # Rewrite theme to a custom one
-    RewriteRule ^theme/example/(.*) /theme/2d/$1 [L]
-</VirtualHost>
-```
-
-La configuration est semblable pour nginx (testé sur environnement de démo)
+Il a donc été nécessaire de créer un patch afin d'ajouter le support d'un tableau associatif dans la valeur de la 
+configuration système theme. Ce tableau permet d'activer un thème en fonction d'une expression régulière évaluée sur la 
+valeur du header `Host`.
 
 ```
-server {
-    listen 80 default_server;
-    server_name  _;
+--- a/lib/private/legacy/util.php
++++ b/lib/private/legacy/util.php
+@@ -1321,6 +1321,29 @@
+ 	 */
+ 	public static function getTheme() {
+ 		$theme = \OC::$server->getSystemConfig()->getValue("theme", '');
++		if (is_array($theme)) {
++			$host = $_SERVER['HTTP_HOST'];
++
++			$themeFound = false;
++			$themeArray = $theme;
++			foreach (array_keys($themeArray) as $key) {
++				if (array_key_exists($key, $host)) {
++					$theme = $themeArray[$key];
++					$themeFound = true;
++					break;
++				}
++			}
++
++			if (!$themeFound) {
++				foreach (array_keys($themeArray) as $key) {
++					if (preg_match($key, $host)) {
++						$theme = $themeArray[$key];
++						break;
++					}
++				}
++			}
++
++		}
+ 
+ 		if ($theme === '') {
+ 			if (is_dir(OC::$SERVERROOT . '/themes/default')) {
+```
 
-    include nextcloud-server.conf;
-}
+Ce patch permet ainsi de configurer le thème en fonction du nom de domaine d'accès dans le fichier `config.php`.
 
-server {
-    listen 80;
-    server_name nextcloud.1d.pce-cloud-2.test;
-
-    include nextcloud-server.conf;
-
-    rewrite ^/themes/default/(.*)$ /themes/1d/$1;
-}
-
-server {
-    listen 80;
-    server_name nextcloud.2d.pce-cloud-2.test;
-
-    include nextcloud-server.conf;
-    rewrite ^/themes/default/(.*)$ /themes/2d/$1;
-}
+```
+'theme' => ['/.*\\.1d\\..*/' => '1d', '/.*\\.2d\\..*/' => '2d'],
 ```

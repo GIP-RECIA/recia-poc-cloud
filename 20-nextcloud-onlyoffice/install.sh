@@ -14,6 +14,8 @@ occ app:install onlyoffice
 occ app:install files_antivirus
 occ app:enable user_ldap
 occ app:enable files_external
+occ app:enable reciacustom
+occ app:disable theming
 
 dc exec nextcloud-php apply-nextcloud-patches
 

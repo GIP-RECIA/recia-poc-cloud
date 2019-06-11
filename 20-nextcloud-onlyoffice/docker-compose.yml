@@ -17,6 +17,7 @@ services:
       - pce-env
     volumes:
       - '${COMPOSE_PROJECT_DIR}/nextcloud:/var/www/html'
+      - '${COMPOSE_PROJECT_DIR}/themes:/var/www/html/themes'
       - '${COMPOSE_PROJECT_DIR}/config:/config'
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'
@@ -30,6 +31,7 @@ services:
     restart: '${DOCKER_DEVBOX_RESTART_POLICY}'
     volumes:
       - '${COMPOSE_PROJECT_DIR}/nextcloud:/var/www/html'
+      - '${COMPOSE_PROJECT_DIR}/themes:/var/www/html/themes'
       - '${COMPOSE_PROJECT_DIR}/config:/config'
       - '${COMPOSE_PROJECT_DIR}/patches:/patches'
       - '${COMPOSE_PROJECT_DIR}/../nextcloud-custom-apps/nextcloud-recia-custom:/var/www/html/custom_apps/reciacustom'

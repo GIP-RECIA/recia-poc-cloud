@@ -14,6 +14,7 @@ occ app:install richdocuments
 occ app:install files_antivirus
 occ app:enable user_ldap
 occ app:enable files_external
+occ app:enable reciacustom
 
 dc exec nextcloud-php apply-nextcloud-patches
 

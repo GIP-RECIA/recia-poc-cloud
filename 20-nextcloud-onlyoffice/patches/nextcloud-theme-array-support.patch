@@ -1,0 +1,38 @@
+Index: server/lib/private/legacy/util.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- a/lib/private/legacy/util.php
++++ b/lib/private/legacy/util.php
+@@ -1321,6 +1321,29 @@
+ 	 */
+ 	public static function getTheme() {
+ 		$theme = \OC::$server->getSystemConfig()->getValue("theme", '');
++		if (is_array($theme)) {
++			$host = $_SERVER['HTTP_HOST'];
++
++			$themeFound = false;
++			$themeArray = $theme;
++			foreach (array_keys($themeArray) as $key) {
++				if (array_key_exists($key, $host)) {
++					$theme = $themeArray[$key];
++					$themeFound = true;
++					break;
++				}
++			}
++
++			if (!$themeFound) {
++				foreach (array_keys($themeArray) as $key) {
++					if (preg_match($key, $host)) {
++						$theme = $themeArray[$key];
++						break;
++					}
++				}
++			}
++
++		}
+ 
+ 		if ($theme === '') {
+ 			if (is_dir(OC::$SERVERROOT . '/themes/default')) {
+
