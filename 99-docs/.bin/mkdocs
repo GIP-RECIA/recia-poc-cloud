@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+. "$DOCKER_DEVBOX_SCRIPTS_PATH/.bash.lib.d/50-docker"
+
+if [[ $1 == "serve" ]]; then
+  _RUN_REVERSE_PROXY_ENABLE=1 run --workdir="$(_docker_workdir "/docs")" mkdocs "$@" --dev-addr=0.0.0.0:8000
+else
+  run --workdir="$(_docker_workdir "/docs")" mkdocs "$@"
+fi
+

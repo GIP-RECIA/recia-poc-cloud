@@ -1,0 +1,11 @@
+version: '2.2'
+services:
+  mkdocs:
+    build:
+      context: .docker
+      dockerfile: mkdocs/Dockerfile
+    image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/mkdocs'
+    volumes:
+      - "${HOME}/.gitconfig:/root/.gitconfig:ro"
+      - "${COMPOSE_PROJECT_DIR}:/docs"
+
