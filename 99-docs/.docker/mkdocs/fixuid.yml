@@ -1,0 +1,4 @@
+user: mkdocs
+group: mkdocs
+paths:
+  - /

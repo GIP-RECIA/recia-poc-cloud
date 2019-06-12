@@ -5,6 +5,7 @@ services:
       context: .docker
       dockerfile: mkdocs/Dockerfile
     image: '${DOCKER_DEVBOX_REGISTRY}${DOCKER_DEVBOX_REGISTRY_REPOSITORY}/mkdocs'
+    user: '${USER_ID}:${GROUP_ID}'
     volumes:
       - "${HOME}/.gitconfig:/root/.gitconfig:ro"
       - "${COMPOSE_PROJECT_DIR}:/docs"

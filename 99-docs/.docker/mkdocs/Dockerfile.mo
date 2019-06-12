@@ -15,3 +15,14 @@ EXPOSE 8000
 
 # Start development server by default
 ENTRYPOINT ["mkdocs"]
+
+# fixuid
+ADD fixuid.tar.gz /usr/local/bin
+RUN chown root:root /usr/local/bin/fixuid && \
+    chmod 4755 /usr/local/bin/fixuid && \
+    mkdir -p /etc/fixuid
+COPY mkdocs/fixuid.yml /etc/fixuid/config.yml
+
+RUN addgroup -g 1000 mkdocs && adduser -D -u 1000 -G mkdocs mkdocs
+
+USER mkdocs:mkdocs
