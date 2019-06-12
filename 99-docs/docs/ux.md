@@ -2,7 +2,7 @@ UX
 ==
 
 Solutions de stockage
------------------------------
+---------------------
 
 NextCloud intègre plus de fonctionnalités de Seafile et peut être étendu par des Apps.
 

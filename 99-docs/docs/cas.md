@@ -4,20 +4,20 @@ Intégration CAS
 NextCloud
 ---------
 
-NextCloud propose une application (CAS user an group backend) pour intégrer le SSO fourni par CAS.
+NextCloud propose une application (CAS user an group backend) pour implémenter le SSO via CAS.
 
 Cependant, il n'est plus possible d'utiliser à la fois l'authentification CAS et le plugin LDAP pour gérer les
 connexions d'un même pool d'utilisateur. Il faut donc faire un choix entre les fonctionnalités apportées par le plugin 
-LDAP et par le plugin CAS, ce qui pose problème.
+LDAP et par le plugin CAS, ce qui pose problème. Ce plugin n'est donc finalement pas une option.
 
-Il existe également une application officielle et plus générique (SSO & SAML authentication). Cette application à 
-l'avantage d'être compatible avec le plugin LDAP, et peut se paramétrer pour authentifier l'utilisateur via un Header 
-HTTP ajouté par exemple via le module Apache [mod_auth_cas](https://github.com/apereo/mod_auth_cas). Il semble donc
-préférable d'utilise ce plugin pour implémenter le SSO, plutôt que le plugin dédié pour CAS.
+Il existe également une application officielle et plus générique: SSO & SAML authentication. Cette application à 
+l'avantage d'être compatible avec le plugin LDAP.
 
-Après avoir réalisé de nombreux tests, l'authentification SAML est la seule option viable pour que l'ensemble 
-fonctionne comme attendu. Les environnements docker nextcloud sont paramétrés pour utiliser ce protocole et prouvent 
-le fonctionnement du SSO avec CAS.
+Après avoir réalisé de nombreux tests, l'authentification SAML proposée par ce plugin est la seule option viable pour 
+que l'ensemble fonctionne comme attendu. 
+
+Les environnements docker nextcloud sont paramétrés pour utiliser ce protocole et prouvent le fonctionnement du SSO
+avec CAS 6.
 
 Le Single Sign Out a été testé et fonctionne comme attendu en SAML. Il est important de configurer la propriété 
 `metadataLocation` pour que le SLS (Single Logout Service) de Nextcloud soit enregistré auprès de CAS.

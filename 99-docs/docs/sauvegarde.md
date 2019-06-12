@@ -11,6 +11,8 @@ NextCloud
 
 [Restoring backup](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/restore.html)
 
+Ce processus de sauvegarde et de restauration a été validé lors d'un test sur l'environnement de démonstration.
+
 Seafile
 -------
 

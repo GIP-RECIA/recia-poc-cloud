@@ -9,6 +9,8 @@ enregistrement.
 
 L'intégration de ClamAV [est simple et documentée](https://docs.nextcloud.com/server/stable/admin_manual/configuration_server/antivirus_configuration.html).
 
+L'antivirus ClamAV est configuré et actif sur les environnements Nextcloud de démonstration.
+
 Seafile
 -------
 

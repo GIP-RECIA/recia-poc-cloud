@@ -22,7 +22,12 @@ Ainsi il est possible d'intégrer des composants supplémentaires, dans n'import
 
 Le theming permet également de surcharger n'importe quel fichier PHP, ce qui est également un moyen 
 d'apporter une modification sans directement modifier le code source. Cette solution reste cependant a éviter, car
-elle rends la mise à jour de NextCloud délicate (merge à réaliser). 
+elle rends la mise à jour de NextCloud délicate (merge à réaliser).
+
+L'environnement de démonstration Nextcloud intègre une App spécifique nommé `reciacustom` dans le sous-module git 
+[nextcloud-custom-apps/nextcloud-recia-custom](https://github.com/GIP-RECIA/nextcloud-recia-custom). Cette application 
+démontre les possibilités de personnalisations sur les facilités de collaborateurs et de partage (filtrage des 
+utilisateurs par établissement). 
 
 Seafile
 -------

@@ -20,6 +20,9 @@ database table.
 Then you can run a command to display this table, displaying only the users marked as `deleted`, and then you have the 
 option of removing their data from your Nextcloud data directory.
 
+La suppression d'un utilisateur et de ses données associées peut se faire en ligne de commande 
+(`occ user:delete <uid>`) ou par l'[API](https://docs.nextcloud.com/server/15/admin_manual/configuration_user/instruction_set_for_users.html#delete-a-user).
+
 Seafile
 -------
 

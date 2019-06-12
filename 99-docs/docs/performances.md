@@ -24,10 +24,6 @@ l'avantage des performances apportées par le protocole par défaut.
 
 NextCloud utilise WebDav pour la synchronisation des fichiers ce qui le rends plus ouvert.
 
-### Tests de performance
-
-***TODO***
-
 Solution d'édition
 ------------------
 
@@ -42,7 +38,8 @@ permanence avec le serveur. Cette architecture décharge énormément de travail
 D'après son auteur, OnlyOffice peut supporter sur un serveur double cœur jusqu’à 150 utilisateurs, tandis qu’avec 
 Collabora il peut en accueillir dix seulement.
 
-### Tests de performance
+Tests de performance
+--------------------
 
 Des tests ont été écrits en python avec [locust](https://docs.locust.io), un outils de test de montée en charge facile
 d'accès et distribué.
@@ -54,4 +51,4 @@ OnlyOffice. Ce test de montée en charge à permis de montrer que le service Onl
 utilisateurs l'utilisent en même temps (limite annoncée de la license OpenSource). Cela a également mis en évidence
 une certaine lenteur de Nextcloud lors de la manipulation des fichiers via Webdav. 
  
-La mise en oeuvre d'un load balancer permettre de mitiger ces problèmes.
+Une stratégie de mise à l'échelle horizontale permettrait de mitiger ces problèmes.

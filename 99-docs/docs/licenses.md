@@ -61,6 +61,11 @@ OnlyOffice est fourni sous license AGPL v3
 
 Les modifications apportées à OnlyOffice doivent être publiées sous une license compatible GPL.
 
+La version gratuite est cependant limitée à 20 utilisateurs simultanés par serveur, et cette limite a été atteinte lors
+de l'execution du test de performance. 
+
+Il est peut-être possible d'utiliser un load balancer pour obtenir un nombre d'utilisateur simultané plus important (à Valider).
+
 Rappels sur les licenses rencontrées
 ====================================
 

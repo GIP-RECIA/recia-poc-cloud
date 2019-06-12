@@ -7,7 +7,15 @@ Les solutions d'édition ne sont pas personnalisables.
 
 ### NextCloud
 
-NextCloud implémente une véritable fonctionnalité de thème, qui intègre la possibilité de personnaliser
+NextCloud implémente deux notions qui impactent l'apparence de l'application:
+
+  - L'application `theming`, qui permet de personnaliser le thème sans écrire de code (IHM).
+  - Les thèmes, présents dans `nextcloud/themes`, qui permettent de modifier l'apparence et le comportement de 
+  Nextcloud en profondeur.
+
+Pour activer les thèmes, il est nécessaire de désactiver l'application `theming` (`occ app:disable theming`).
+
+Les thèmes intègrent la possibilité de personnaliser:
 
  - CSS
  - JavaScript
@@ -16,9 +24,6 @@ NextCloud implémente une véritable fonctionnalité de thème, qui intègre la 
  - Templates HTML et PHP
 
 Il est donc possible dans NextCloud de modifier n'importe quelle partie de l'application via le thème.
-
-Cette fonctionnalité de thème avancé nécessite la désactivation de l'application `theming` qui permet une légère 
-personnalisation via des paramétrages dans l'IHM.
 
 Voir [Theming Nextcloud](https://docs.nextcloud.com/server/stable/developer_manual/core/theming.html)
 
