@@ -8,5 +8,5 @@ services:
     user: '${USER_ID}:${GROUP_ID}'
     volumes:
       - "${HOME}/.gitconfig:/root/.gitconfig:ro"
-      - "${COMPOSE_PROJECT_DIR}:/docs"
+      - "${COMPOSE_PROJECT_DIR}/..:/docs"
 
