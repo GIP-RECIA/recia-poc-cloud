@@ -13,8 +13,8 @@ Parmis ces sources, on trouve même Nextcloud, qui permet de connecté un autre 
 Cette fonctionnalité a été mise en place sur les environnements de test et fonctionne comme attendu.
 
 Si vous souhaitez permettre le partage sur le NextCloud externe, il faut paramétrer l'authentification sur 
-"Identifiants de connexion, sauvegarder dans la base de données", et active l'option "Permettre le partage". 
-L'utilisateur doit s'être connecté une premièer fois sur l'autre serveur pour que cela fonctionne.
+"Identifiants de connexion, sauvegarder dans la base de données", et activer l'option "Permettre le partage". 
+L'utilisateur doit s'être connecté une première fois sur l'autre serveur pour que cela fonctionne.
 
 Si vous ne souhaitez pas permettre le partage sur le NextCloud externe, il vaut mieux paramétrer l'authentification sur 
 "Identifiants de connexion, sauvegardés pour la session". Ce mode ne nécessite pas que l'utilisateur se soit connecté une 
