@@ -1,38 +1,67 @@
-Index: server/lib/private/legacy/util.php
+Index: 20-nextcloud-onlyoffice/nextcloud/lib/private/legacy/util.php
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- a/lib/private/legacy/util.php
-+++ b/lib/private/legacy/util.php
-@@ -1321,6 +1321,29 @@
- 	 */
+--- a/lib/private/legacy/util.php	(date 1560432598128)
++++ b/lib/private/legacy/util.php	(date 1560432598128)
+@@ -1322,6 +1322,33 @@
  	public static function getTheme() {
  		$theme = \OC::$server->getSystemConfig()->getValue("theme", '');
+ 
 +		if (is_array($theme)) {
-+			$host = $_SERVER['HTTP_HOST'];
-+
-+			$themeFound = false;
-+			$themeArray = $theme;
-+			foreach (array_keys($themeArray) as $key) {
-+				if (array_key_exists($key, $host)) {
-+					$theme = $themeArray[$key];
-+					$themeFound = true;
-+					break;
-+				}
-+			}
-+
-+			if (!$themeFound) {
++			if (array_key_exists('HTTP_HOST', $_SERVER)) {
++				$host = $_SERVER['HTTP_HOST'];
++	
++				$themeFound = false;
++				$themeArray = $theme;
 +				foreach (array_keys($themeArray) as $key) {
-+					if (preg_match($key, $host)) {
++					if (array_key_exists($key, $host)) {
 +						$theme = $themeArray[$key];
++						$themeFound = true;
 +						break;
 +					}
 +				}
-+			}
 +
++				if (!$themeFound) {
++					foreach (array_keys($themeArray) as $key) {
++						if (preg_match($key, $host)) {
++							$theme = $themeArray[$key];
++							break;
++						}
++					}
++				}
++			} else {
++				$theme = NULL;
++			}
 +		}
- 
++
  		if ($theme === '') {
  			if (is_dir(OC::$SERVERROOT . '/themes/default')) {
+ 				$theme = 'default';
 
+Index: server/lib/private/L10N/Factory.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- a/lib/private/L10N/Factory.php	(date 1560430860143)
++++ b/lib/private/L10N/Factory.php	(date 1560430860143)
+@@ -294,7 +294,7 @@
+ 		}
+ 
+ 		// merge with translations from theme
+-		$theme = $this->config->getSystemValue('theme');
++		$theme = \OC_Util::getTheme();
+ 		if (!empty($theme)) {
+ 			$themeDir = $this->serverRoot . '/themes/' . $theme . substr($dir, strlen($this->serverRoot));
+ 
+@@ -475,7 +475,7 @@
+ 		}
+ 
+ 		// merge with translations from theme
+-		$theme = $this->config->getSystemValue('theme');
++		$theme = \OC_Util::getTheme();
+ 		if (!empty($theme)) {
+ 			$transFile = $this->serverRoot . '/themes/' . $theme . substr($transFile, strlen($this->serverRoot));
+ 			if (file_exists($transFile)) {
