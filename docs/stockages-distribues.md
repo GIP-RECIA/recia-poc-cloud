@@ -27,6 +27,18 @@ Si certains accès sont anormalement lent, il peut-être utile de désactiver la
 `auth.bruteforce.protection.enabled' => false
 ```
 
+Chaque établissement possède donc sa propre instance Nextcloud, et un lien apparait pour accéder au Nextcloud central
+lorsque l'utilisateur est connecté à l'établissement. L'authentification est transparente à condition d'utiliser les 
+mêmes identifiants sur les deux instances et que l'utilisateur se soit connecté au moins une fois sur les deux 
+instances.
+
+Après avoir testé l'ensemble des possibilités de configuration offertes par Nextcloud, il n'est pas possible avec de 
+proposer un point d'entré unique. L'utilisateur doit donc choisir s'il se connecte au Nextcloud central ou à celui de 
+l'établissement (2 URLs différentes).
+
+La création de liens dans les deux sens (du central vers l'établissement, et de l'établissement vers le central) pose 
+un problème de recursion. Il faudra donc déterminer un seul lien (plutôt de l'établissement vers le central).
+
 Seafile
 -------
 
